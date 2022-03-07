@@ -1,11 +1,11 @@
 <template>
   <el-container class="container">
     <el-aside width="200px">
-      <b-aside></b-aside>
+      <b-aside :isCollapse="isCollapse"></b-aside>
     </el-aside>
     <el-container>
       <el-header>
-        <b-header></b-header>
+        <b-header @getCollapse="getCollapse"></b-header>
       </el-header>
       <el-main>
         <router-view></router-view>
@@ -18,6 +18,16 @@ import bHeader from "@/components/header"
 import bAside from "@/components/aside"
 
 export default {
+  data() {
+    return {
+      isCollapse: false
+    }
+  },
+  methods: {
+    getCollapse(collapse) {
+      this.isCollapse = collapse
+    }
+  },
   components: {
     bHeader,
     bAside
