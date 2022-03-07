@@ -5,7 +5,7 @@
     </div>
     <div>
       <el-scrollbar height="calc(100vh - 60px)">
-        <el-menu background-color="#191a23" text-color="#ffffff" active-text-color="#ffffff" :unique-opened="true"
+        <el-menu background-color="#191a23" text-color="#ffffff" active-text-color="#1890ff" :unique-opened="true"
                  default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
           <el-sub-menu index="1">
             <template #title>
@@ -16,9 +16,9 @@
             </template>
             <el-menu-item index="1-1">item one</el-menu-item>
             <el-menu-item index="1-2">item one</el-menu-item>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
+
+            <el-menu-item index="1-3">item three</el-menu-item>
+
             <el-sub-menu index="1-4">
               <template #title>item four</template>
               <el-menu-item index="1-4-1">item one</el-menu-item>
@@ -94,6 +94,7 @@ export default {
     background-color: rgba(0, 0, 0, 0);
     border: none;
   }
+  
 
   .logo {
     display: flex;
