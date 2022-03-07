@@ -1,6 +1,6 @@
 <template>
   <el-container class="container">
-    <el-aside width="200px">
+    <el-aside :width="isCollapse?'64px':'200px'" class="aside-transition">
       <b-aside :isCollapse="isCollapse"></b-aside>
     </el-aside>
     <el-container>
@@ -44,7 +44,9 @@ export default {
   --el-header-padding: 0 0 !important;
   padding: var(--el-header-padding) !important;
 }
-
+.aside-transition{
+  transition: width .3s;
+}
 .container {
   height: 100vh
 }

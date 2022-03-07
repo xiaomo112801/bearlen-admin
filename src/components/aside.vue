@@ -6,8 +6,8 @@
     <div>
       <el-scrollbar height="calc(100vh - 60px)">
         <el-menu background-color="#191a23" text-color="#ffffff" active-text-color="#1890ff" :unique-opened="true"
-                 default-active="2" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-                 :collapse="isCollapse">
+                 default-active="2" class="el-menu-vertical" @open="handleOpen" @close="handleClose"
+                 :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu index="1">
             <template #title>
               <el-icon>
@@ -180,12 +180,11 @@ export default {
   display: flex;
   flex-direction: column;
 
-  .el-menu-vertical-demo:not(.el-menu--collapse) {
+  .el-menu-vertical:not(.el-menu--collapse) {
     width: 200px;
-    min-height: 400px;
   }
 
-  .el-menu-vertical-demo {
+  .el-menu-vertical {
     background-color: rgba(0, 0, 0, 0);
     border: none;
   }
