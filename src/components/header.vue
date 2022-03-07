@@ -3,7 +3,8 @@
     <div class="page-info">
       <div class="fold" @click="setCollapse">
         <el-icon :size="20">
-          <fold />
+          <fold v-if="collapse" />
+          <expand v-else />
         </el-icon>
       </div>
       <div class="refresh">
@@ -42,7 +43,7 @@
 </template>
 
 <script>
-import { ArrowDownBold, Bell, Fold, Refresh } from "@element-plus/icons-vue"
+import { ArrowDownBold, Bell, Fold, Refresh, Expand } from "@element-plus/icons-vue"
 
 export default {
   name: "header",
@@ -61,7 +62,8 @@ export default {
     ArrowDownBold,
     Bell,
     Fold,
-    Refresh
+    Refresh,
+    Expand
   }
 }
 </script>
