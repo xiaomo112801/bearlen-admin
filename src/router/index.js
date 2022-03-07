@@ -4,6 +4,12 @@ import index from "@/views/index/index"
 const routes = [
   {
     path: "/",
+    name: "/",
+    component: index
+  },
+  {
+    path: "/index",
+    name: "index",
     component: index
   }
 ]
