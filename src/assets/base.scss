@@ -1,0 +1,46 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
+  margin: 0;
+  padding: 0
+}
+
+body, button, input, pre, select, textarea {
+  font-family: "Microsoft Yahei", Arial, sans-serif, Arial, STHeiti;
+  font-size: 12px;
+
+}
+
+body {
+  background-color: #fafafa;
+}
+
+ol, ul {
+  list-style: none outside none;
+}
+
+a {
+  color: #2c3e50;
+  text-decoration: none;
+
+  :hover {
+    color: #2c3e50;
+    cursor: pointer;
+  }
+
+  :focus {
+    outline: 0;
+    -moz-outline: 0;
+    -webkit-outline: 0;
+  }
+}
+
+
+
