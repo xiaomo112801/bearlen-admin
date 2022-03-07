@@ -1,20 +1,56 @@
 <template>
-  <div>
-    <div>
-      <img src="" alt="">
-    </div>
-    <div>
-      <swiper></swiper>
-    </div>
-  </div>
+  <el-container class="container">
+    <el-aside :width="isCollapse?'64px':'200px'" class="aside-transition">
+      <b-aside :isCollapse="isCollapse"></b-aside>
+    </el-aside>
+    <el-container>
+      <el-header>
+        <b-header @getCollapse="getCollapse"></b-header>
+      </el-header>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
+import bHeader from "@/components/header"
+import bAside from "@/components/aside"
+
 export default {
-  name: "base"
+  data() {
+    return {
+      isCollapse: false
+    }
+  },
+  methods: {
+    getCollapse(collapse) {
+      this.isCollapse = collapse
+    }
+  },
+  components: {
+    bHeader,
+    bAside
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
+.el-header {
+  color: var(--el-text-color-primary);
+  text-align: center;
+  line-height: 60px;
+  --el-header-padding: 0 0 !important;
+  padding: var(--el-header-padding) !important;
+}
+
+.aside-transition {
+  transition: width .3s;
+}
+
+.container {
+  height: 100vh
+}
 </style>
