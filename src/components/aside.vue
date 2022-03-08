@@ -5,247 +5,25 @@
     </div>
     <div>
       <el-scrollbar height="calc(100vh - 60px)">
-        <el-menu background-color="#191a23" text-color="#ffffff" active-text-color="#1890ff" :unique-opened="true"
-                 default-active="2" class="el-menu-vertical" @open="handleOpen" @close="handleClose"
+        <el-menu background-color="#191a23" text-color="#ffffff"
+                 active-text-color="#1890ff" :unique-opened="true"
+                 default-active="2" class="el-menu-vertical"
+                 @open="handleOpen" @close="handleClose"
                  :collapse="isCollapse" :collapse-transition="false">
-          <el-sub-menu index="1">
+          <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="index">
             <template #title>
-              <el-icon>
-                <odometer />
-              </el-icon>
-              <span>控制面板</span>
+              <el-icon v-if="item.iconType === 2" class="el-icon iconfont" :class="item.iconClass"></el-icon>
+              <el-icon :class=" item.icon "></el-icon>
+              <!--                {{ `< ${item.icon} />` }}-->
+              <!--              </el-icon>-->
+              <span>{{ item.name }}</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item v-for="(val,childIndex) in item.childMenu" :key="childIndex"
+                          :index="`${index}-${childIndex}`">
               <template #title>
-                <el-icon>
-                  <monitor />
-                </el-icon>
-                <span>工作台</span>
-              </template>
-
-            </el-menu-item>
-            <el-menu-item index="1-2">
-              <template #title>
-                <el-icon>
-                  <data-analysis />
-                </el-icon>
-                <span> 分析页</span>
-              </template>
-
-            </el-menu-item>
-            <el-menu-item index="1-3">
-              <template #title>
-                <el-icon>
-                  <camera />
-                </el-icon>
-                <span>监控页</span>
-              </template>
-
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>
-              <el-icon>
-                <setting />
-              </el-icon>
-              <span>系统管理</span>
-            </template>
-            <el-menu-item index="2-1">
-              <template #title>
-                <el-icon class="iconfont icon-huiyuan1"></el-icon>
-                <span>用户管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-2">
-              <template #title>
-                <el-icon class="iconfont icon-jiaoseguanli"></el-icon>
-                <span>角色管理</span>
-              </template>
-
-            </el-menu-item>
-            <el-menu-item index="2-3">
-              <template #title>
-                <el-icon class="iconfont icon-caidan"></el-icon>
-                <span>菜单管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-4">
-              <template #title>
-                <el-icon class="iconfont icon-zhiweiguanli"></el-icon>
-                <span>职级管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-5">
-              <template #title>
-                <el-icon class="iconfont icon-gangwei"></el-icon>
-                <span>岗位管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-6">
-              <template #title>
-                <el-icon>
-                  <office-building />
-                </el-icon>
-                <span>部门管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-7">
-              <template #title>
-                <el-icon>
-                  <document />
-                </el-icon>
-                登录日志
-              </template>
-            </el-menu-item>
-            <el-menu-item index="2-8">
-              <template #title>
-                <el-icon class="iconfont icon-wj-rz"></el-icon>
-                <span>操作日志</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="3">
-            <template #title>
-              <el-icon class="iconfont icon-shujuzhongxin el-icon"></el-icon>
-              <span>数据中心</span>
-            </template>
-            <el-menu-item index="3-1">
-              <template #title>
-                <el-icon class="iconfont icon-zidianguanli"></el-icon>
-                <span>字典管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="3-2">
-              <template #title>
-                <el-icon>
-                  <OfficeBuilding />
-                </el-icon>
-                <span>城市管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="3-3">
-              <template #title>
-                <el-icon class="iconfont icon-xitongshezhi"></el-icon>
-                <span>配置管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="3-4">
-              <template #title>
-                <el-icon>
-                  <bell />
-                </el-icon>
-                <span>通知公告</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="3-5">
-              <template #title>
-                <el-icon class="iconfont icon-youqinglianjie"></el-icon>
-                <span>友链管理</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="4">
-            <template #title>
-              <el-icon>
-                <user />
-              </el-icon>
-              <span>个人中心</span>
-            </template>
-            <el-menu-item index="4-1">
-              <template #title>
-                <el-icon class="iconfont icon-gerenziliao"></el-icon>
-                个人资料
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="5">
-            <template #title>
-              <el-icon class="iconfont icon-yunyingzhongxin"></el-icon>
-              <span>运营中心</span>
-            </template>
-            <el-menu-item index="5-1">
-              <template #title>
-                <el-icon class="iconfont icon-guanggaoweishezhi" :size="14"></el-icon>
-                <span>广告位管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="5-2">
-              <template #title>
-                <el-icon class="iconfont icon-guanggaoguanli" :size="14"></el-icon>
-                <span>广告管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="5-3">
-              <template #title>
-                <el-icon class="iconfont icon-buju" :size="14"></el-icon>
-                <span>布局描述管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="5-4">
-              <template #title>
-                <el-icon class="iconfont icon-buju" :size="14"></el-icon>
-                <span>布局管理</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="6">
-            <template #title>
-              <el-icon class="iconfont icon-icon" :size="16"></el-icon>
-              <span>内容管理</span>
-            </template>
-            <el-menu-item index="6-1">
-              <template #title>
-                <el-icon class="iconfont icon-wangzhanguanli" :size="16"></el-icon>
-                <span>站点管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="6-2">
-              <template #title>
-                <el-icon class="iconfont icon-nav" :size="16"></el-icon>
-                <span>栏目管理</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="6-3">
-              <template #title>
-                <el-icon class="iconfont icon-navicon-wzgl" :size="16"></el-icon>
-                <span>文章管理</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="7">
-            <template #title>
-              <el-icon class="icon-huiyuan1 iconfont"></el-icon>
-              <span>会员管理</span>
-            </template>
-            <el-menu-item index="7-1">
-              <template #title>
-                <el-icon class="icon-huiyuandengji iconfont" :size="16"></el-icon>
-                <span>会员等级</span>
-              </template>
-            </el-menu-item>
-            <el-menu-item index="7-2">
-              <template #title>
-                <el-icon class="icon-huiyuan1 iconfont"></el-icon>
-                <span>会员管理</span>
-              </template>
-            </el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="8">
-            <template #title>
-              <el-icon class="iconfont icon-xitongshezhi"></el-icon>
-              <span>系统设置</span>
-            </template>
-            <el-menu-item index="8-1">网站设置</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="9">
-            <template #title>
-              <el-icon class="icon-gongju iconfont"></el-icon>
-              <span>系统工具</span>
-            </template>
-            <el-menu-item index="9-1">
-              <template #title>
-                <el-icon class="icon-daimashengcheng iconfont"></el-icon>
-                <span>代码生成</span>
+                <el-icon v-if="val.iconType === 2" class="el-icon iconfont" :class="val.iconClass"></el-icon>
+                <el-icon :class=" val.icon "></el-icon>
+                <span>{{ val.name }}</span>
               </template>
             </el-menu-item>
           </el-sub-menu>
@@ -272,6 +50,69 @@ export default {
   name: "aside",
   props: {
     isCollapse: Boolean
+  },
+  data() {
+    return {
+      menuList: [
+        {
+          name: "控制面板", iconType: 1, iconClass: "", icon: "odometer", childMenu: [
+            { name: "工作台", iconType: 1, iconClass: "", icon: "monitor", url: "" },
+            { name: "分析页", iconType: 1, iconClass: "", icon: "data-analysis", url: "" },
+            { name: "监控页", iconType: 1, iconClass: "", icon: "camera", url: "" }
+          ]
+        }, {
+          name: "系统管理", iconType: 1, iconClass: "", icon: "setting", childMenu: [
+            { name: "用户管理", iconType: 2, iconClass: "icon-huiyuan1", icon: "", url: "" },
+            { name: "角色管理", iconType: 2, iconClass: "icon-jiaoseguanli", icon: "", url: "" },
+            { name: "菜单管理", iconType: 2, iconClass: "icon-caidan", icon: "camera", url: "" },
+            { name: "职级管理", iconType: 2, iconClass: "icon-zhiweiguanli", icon: "camera", url: "" },
+            { name: "岗位管理", iconType: 2, iconClass: "icon-gangwei", icon: "camera", url: "" },
+            { name: "部门管理", iconType: 1, iconClass: "", icon: "office-building", url: "" },
+            { name: "登录日志", iconType: 1, iconClass: "", icon: "document", url: "" },
+            { name: "操作日志", iconType: 2, iconClass: "icon-wj-rz", icon: "", url: "" }
+          ]
+        }, {
+          name: "数据中心", iconType: 2, iconClass: "icon-shujuzhongxin", icon: "", childMenu: [
+            { name: "字典管理", iconType: 2, iconClass: "icon-zidianguanli", icon: "", url: "" },
+            { name: "城市管理", iconType: 1, iconClass: "", icon: "OfficeBuilding", url: "" },
+            { name: "配置管理", iconType: 2, iconClass: "icon-xitongshezhi", icon: "", url: "" },
+            { name: "通知公告", iconType: 1, iconClass: "", icon: "bell", url: "" },
+            { name: "友链管理", iconType: 2, iconClass: "icon-youqinglianjie", icon: "", url: "" }
+          ]
+        }, {
+          name: "个人中心", iconType: 1, iconClass: "", icon: "user", childMenu: [
+            { name: "个人资料", iconType: 2, iconClass: "icon-gerenziliao", icon: "", url: "" }
+          ]
+        }, {
+          name: "运营中心", iconType: 2, iconClass: "icon-yunyingzhongxin", icon: "", childMenu: [
+            { name: "广告位管理", iconType: 2, iconClass: "icon-guanggaoweishezhi", icon: "", url: "" },
+            { name: "广告管理", iconType: 2, iconClass: "icon-guanggaoguanli", icon: "", url: "" },
+            { name: "布局描述管理", iconType: 2, iconClass: "icon-buju", icon: "", url: "" },
+            { name: "布局管理", iconType: 2, iconClass: "icon-buju", icon: "", url: "" }
+          ]
+        }, {
+          name: "内容管理", iconType: 2, iconClass: "icon-icon", icon: "", childMenu: [
+            { name: "广告位管理", iconType: 2, iconClass: "icon-guanggaoweishezhi", icon: "", url: "" },
+            { name: "广告管理", iconType: 2, iconClass: "icon-guanggaoguanli", icon: "", url: "" },
+            { name: "布局描述管理", iconType: 2, iconClass: "icon-buju", icon: "", url: "" },
+            { name: "布局管理", iconType: 2, iconClass: "icon-buju", icon: "", url: "" }
+          ]
+        }, {
+          name: "会员管理", iconType: 2, iconClass: "icon-huiyuan1", icon: "", childMenu: [
+            { name: "会员等级", iconType: 2, iconClass: "icon-huiyuandengji", icon: "", url: "" },
+            { name: "会员管理", iconType: 2, iconClass: "icon-huiyuan1", icon: "", url: "" }
+          ]
+        }, {
+          name: "系统设置", iconType: 2, iconClass: "icon-xitongshezhi", icon: "", childMenu: [
+            { name: "网站设置", iconType: 2, iconClass: "icon-shuangchilun", icon: "", url: "" }
+          ]
+        }, {
+          name: "系统工具", iconType: 2, iconClass: "icon-gongju", icon: "", childMenu: [
+            { name: "代码生成", iconType: 2, iconClass: "icon-daimashengcheng", icon: "", url: "" }
+          ]
+        }
+      ]
+    }
   },
   watch: {},
   methods: {
@@ -321,7 +162,7 @@ export default {
     padding: 0 10px;
     height: 60px;
     overflow: hidden;
-    margin:10px 20px;
+    margin: 10px 20px;
 
     img {
       width: 100%;
