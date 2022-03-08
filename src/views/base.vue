@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import bHeader from "@/components/header"
-import bAside from "@/components/aside"
+import bHeader from "@/components/bHeader"
+import bAside from "@/components/bAside"
 
 export default {
   data() {

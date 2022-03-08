@@ -46,7 +46,7 @@
 import { ArrowDownBold, Bell, Fold, Refresh, Expand } from "@element-plus/icons-vue"
 
 export default {
-  name: "header",
+  name: "bHeader",
   data() {
     return {
       collapse: true
