@@ -1,40 +1,117 @@
 @font-face {
-    font-family: "iconfont"; /* Project id 3228343 */
-    src: url('iconfont.ttf?t=1646663227242') format('truetype');
+  font-family: "iconfont"; /* Project id 3228343 */
+  src: url('iconfont.ttf?t=1646750334817') format('truetype');
 }
 
 .iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.icon-gengduo:before {
-    content: "\e8c4";
+
+.icon-daimashengcheng:before {
+  content: "\e637";
+}
+
+.icon-jiaoseguanli:before {
+  content: "\e648";
+}
+
+.icon-nav:before {
+  content: "\e60f";
+}
+
+.icon-gerenziliao:before {
+  content: "\e6a8";
+}
+
+.icon-youqinglianjie:before {
+  content: "\e636";
+}
+
+.icon-navicon-wzgl:before {
+  content: "\e661";
+}
+
+.icon-zidianguanli:before {
+  content: "\e669";
+}
+
+.icon-guanggaoweishezhi:before {
+  content: "\e633";
+}
+
+.icon-wangzhanguanli:before {
+  content: "\eabb";
+}
+
+.icon-013shuangchilun:before {
+  content: "\e7f4";
+}
+
+.icon-buju:before {
+  content: "\e80f";
+}
+
+.icon-guanggaoguanli:before {
+  content: "\e602";
+}
+
+.icon-huiyuandengji:before {
+  content: "\e774";
+}
+
+.icon-jiaoseguanli1:before {
+  content: "\e61d";
+}
+
+.icon-wj-rz:before {
+  content: "\e715";
+}
+
+.icon-caidan:before {
+  content: "\e607";
+}
+
+.icon-zhiweiguanli:before {
+  content: "\e63c";
+}
+
+.icon-gangwei:before {
+  content: "\e6c7";
+}
+
+.icon-yanzhengma:before {
+  content: "\e615";
+}
+
+.icon-gengduo-shuxiang:before {
+  content: "\e8c4";
 }
 
 .icon-icon:before {
-    content: "\e62b";
+  content: "\e62b";
 }
 
 .icon-yunyingzhongxin:before {
-    content: "\e620";
+  content: "\e620";
 }
 
 .icon-gongju:before {
-    content: "\e668";
+  content: "\e668";
 }
 
 .icon-xitongshezhi:before {
-    content: "\e74b";
+  content: "\e74b";
 }
 
 .icon-huiyuan1:before {
-    content: "\e642";
+  content: "\e642";
 }
 
 .icon-shujuzhongxin:before {
-    content: "\e617";
+  content: "\e617";
 }
 
