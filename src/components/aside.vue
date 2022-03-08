@@ -11,7 +11,7 @@
           <el-sub-menu index="1">
             <template #title>
               <el-icon>
-                <odometer />
+                <odometer/>
               </el-icon>
               <span>控制面板</span>
             </template>
@@ -26,7 +26,7 @@
           <el-sub-menu index="2">
             <template #title>
               <el-icon>
-                <setting />
+                <setting/>
               </el-icon>
               <span>系统管理</span>
             </template>
@@ -54,7 +54,7 @@
           <el-sub-menu index="4">
             <template #title>
               <el-icon>
-                <user />
+                <user/>
               </el-icon>
               <span>个人中心</span>
             </template>

@@ -2,17 +2,17 @@
   <el-container class="container">
     <el-row class="login" align="middle">
       <el-col :span="10">
-        <el-image src="http://qiniu.bearlen.com/BEARLEN-05.png"></el-image>
+        <el-image src="http://qiniu.bearlen.com/BEAELEN-08.png"></el-image>
       </el-col>
       <el-col :span="10">
-        <el-form label-width="120px">
-          <el-form-item style="margin-left: 0">
+        <el-form label-width="60px" :rules="rule">
+          <el-form-item label="用户名" color="white">
             <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item label="密码">
             <el-input v-model="form.password" placeholder="请输入密码"></el-input>
           </el-form-item>
-          <el-form-item class="vertication">
+          <el-form-item label="验证码" class="vertication">
             <el-input v-model="form.verficationCode" placeholder="请输入验证码"></el-input>
           </el-form-item>
         </el-form>
@@ -30,13 +30,18 @@ export default {
         username: "",
         password: "",
         verficationCode: ""
-      }
+      },
+      rule: {}
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.el-form-item__label {
+  color: var(--el-color-white) !important;
+}
+
 .el-container {
   width: 100%;
   display: flex;
@@ -83,6 +88,10 @@ export default {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      border-left: 1px solid rgba(255, 255, 255, 0.98);
+      border-image: -webkit-linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 30 30;
+      border-image: -moz-linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 30 30;
+      border-image: linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 30 30;
 
       .vertication {
         display: flex;
