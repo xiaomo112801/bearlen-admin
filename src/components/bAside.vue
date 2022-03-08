@@ -7,8 +7,8 @@
       <el-scrollbar height="calc(100vh - 60px)">
         <el-menu background-color="#191a23" text-color="#ffffff"
                  active-text-color="#1890ff" :unique-opened="true"
-                 default-active="2" class="el-menu-vertical"
-                 @open="handleOpen" @close="handleClose"
+                 default-active="/dashboard/workplace" :default-openeds="['1']" class="el-menu-vertical"
+                 @open="handleOpen" @close="handleClose" :router="true"
                  :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="item.index">
             <template #title>
@@ -19,7 +19,7 @@
               <span>{{ item.name }}</span>
             </template>
             <el-menu-item v-for="(val,childIndex) in item.childMenu" :key="childIndex"
-                          :index="val.index">
+                          :index="val.url">
               <template #title>
                 <el-icon v-if="val.iconType === 2" class="el-icon iconfont" :class="val.iconClass"></el-icon>
                 <el-icon v-else>
@@ -45,12 +45,13 @@ export default {
   },
   data() {
     return {
+
       menuList: [
         {
           name: "控制面板", iconType: 1, index: "1", iconClass: "odometer", childMenu: [
-            { name: "工作台", iconType: 1, index: "1-1", iconClass: "monitor", url: "" },
-            { name: "分析页", iconType: 1, index: "1-2", iconClass: "data-analysis", url: "" },
-            { name: "监控页", iconType: 1, index: "1-3", iconClass: "camera", url: "" }
+            { name: "工作台", iconType: 1, index: "1-1", iconClass: "monitor", url: "/dashboard/workplace" },
+            { name: "分析页", iconType: 1, index: "1-2", iconClass: "data-analysis", url: "/dashboard/analysis" },
+            { name: "监控页", iconType: 1, index: "1-3", iconClass: "camera", url: "/dashboard/monitor" }
           ]
         }, {
           name: "系统管理", iconType: 1, index: "2", iconClass: "setting", childMenu: [

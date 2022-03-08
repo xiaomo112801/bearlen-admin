@@ -1,24 +1,37 @@
-import {createRouter, createWebHistory} from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import base from "@/views/base"
-import index from "@/views/index/index"
 import login from "@/views/login/login"
+import workplace from "@/views/dashboard/workplace"
+import analysis from "@/views/dashboard/analysis"
+import monitor from "@/views/dashboard/monitor"
 
 const routes = [
   {
     path: "/",
     name: "/",
-    component: base
-  },
-  {
-    path: "/index",
-    name: "index",
-    component: index
+    component: base,
+    children: [
+      {
+        path: "/dashboard/workplace",
+        name: "workplace",
+        component: workplace
+      }, {
+        path: "/dashboard/analysis",
+        name: "analysis",
+        component: analysis
+      }, {
+        path: "/dashboard/monitor",
+        name: "monitor",
+        component: monitor
+      }
+    ]
   },
   {
     path: "/login",
     name: "login",
     component: login
   }
+
 ]
 
 const router = createRouter({
