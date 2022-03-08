@@ -3,7 +3,7 @@ module.exports = {
     config
       .plugin("html")
       .tap(args => {
-        args[0].title = "一点空间商户后台-手机版"
+        args[0].title = "bearlen-admin管理后台"
         return args
       })
   }
