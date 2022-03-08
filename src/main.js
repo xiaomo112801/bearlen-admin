@@ -6,6 +6,7 @@ import api from "./utils/request"
 
 import ElementPlus from "element-plus"
 import "element-plus/dist/index.css"
+import "@/assets/css/iconfont.css"
 
 const app = createApp(App)
 app.use(ElementPlus)

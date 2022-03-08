@@ -1,13 +1,10 @@
-const {defineConfig} = require('@vue/cli-service')
-
-module.exports = defineConfig({
+module.exports = {
   chainWebpack: config => {
     config
       .plugin("html")
       .tap(args => {
-        args[0].title = "bearlen管理后台"
+        args[0].title = "一点空间商户后台-手机版"
         return args
       })
-  },
-
-})
+  }
+}
