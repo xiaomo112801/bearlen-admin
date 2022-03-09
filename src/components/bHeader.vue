@@ -52,10 +52,19 @@ export default {
       collapse: true
     }
   },
+  created() {
+    console.log(this.$route)
+  },
   methods: {
     setCollapse() {
       this.collapse = !this.collapse
       this.$emit("getCollapse", !this.collapse)
+    }
+  },
+  computed: {
+    routerPath() {
+      console.log(this.$router)
+      return this.$router
     }
   },
   components: {

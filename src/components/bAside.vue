@@ -7,7 +7,7 @@
       <el-scrollbar height="calc(100vh - 60px)">
         <el-menu background-color="#191a23" text-color="#ffffff"
                  active-text-color="#1890ff" :unique-opened="true"
-                 default-active="/dashboard/workplace" :default-openeds="['1']" class="el-menu-vertical"
+                 default-active="/dashboard/workplace" :default-openeds="['0']" class="el-menu-vertical"
                  @open="handleOpen" @close="handleClose" :router="true"
                  :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="item.index">
@@ -19,7 +19,7 @@
               <span>{{ item.name }}</span>
             </template>
             <el-menu-item v-for="(val,childIndex) in item.childMenu" :key="childIndex"
-                          :index="val.url">
+                          :index="val.url" :name="val.name" @click="setNavItem">
               <template #title>
                 <el-icon v-if="val.iconType === 2" class="el-icon iconfont" :class="val.iconClass"></el-icon>
                 <el-icon v-else>
@@ -109,6 +109,12 @@ export default {
   },
   watch: {},
   methods: {
+    setNavItem(menuItem) {
+      console.log(menuItem)
+      const navItem = {
+        url: menuItem.index
+      }
+    },
     handleOpen: (key, keyPath) => {
       console.log(key, keyPath)
     },

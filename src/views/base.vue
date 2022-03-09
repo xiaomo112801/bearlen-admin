@@ -1,14 +1,14 @@
 <template>
   <el-container class="container">
     <el-aside :width="isCollapse?'64px':'200px'" class="aside-transition">
-      <b-aside :isCollapse="isCollapse"></b-aside>
+      <b-aside :isCollapse="isCollapse" @getAsideItem="getAsideItem"></b-aside>
     </el-aside>
     <el-container>
       <el-header>
         <b-header @getCollapse="getCollapse"></b-header>
       </el-header>
       <div class="nav-tab">
-        <b-nav-tab></b-nav-tab>
+        <b-nav-tab :navItem="navItem"></b-nav-tab>
       </div>
       <el-main>
         <router-view></router-view>
@@ -25,12 +25,16 @@ import bNavTab from "@/components/bNavTab"
 export default {
   data() {
     return {
-      isCollapse: false
+      isCollapse: false,
+      navItem: {}
     }
   },
   methods: {
     getCollapse(collapse) {
       this.isCollapse = collapse
+    },
+    getAsideItem(navItem) {
+      this.navItem = navItem
     }
   },
   components: {
