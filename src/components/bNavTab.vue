@@ -65,7 +65,6 @@ export default {
           }
         })
       }
-
       this.editableTabsValue = activeName
       this.editableTabs = tabs.filter((tab) => tab.name !== targetName)
     }
