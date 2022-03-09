@@ -107,28 +107,8 @@ export default {
   display: flex;
   align-items: center;
 
-  .nav-tabs {
-    ::v-deep.el-tabs--border-card {
-      box-shadow: none;
-      background-color: rgba(0, 0, 0, 0);
-      border: none;
-
-    }
-
-    ::v-deep.el-tabs__header {
-      margin: 0;
-    }
-
-    ::v-deep .el-tabs__item {
-
-    }
-
-    .el-tabs__content {
-      padding: 32px;
-      color: #6b778c;
-      font-size: 32px;
-      font-weight: 600;
-    }
+  .el-row {
+    flex: 1;
   }
 
   .left-btn, .right-btn {
