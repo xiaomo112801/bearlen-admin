@@ -3,13 +3,13 @@
     <div class="page-info">
       <div class="fold" @click="setCollapse">
         <el-icon :size="20">
-          <fold v-if="collapse" />
-          <expand v-else />
+          <fold v-if="collapse"/>
+          <expand v-else/>
         </el-icon>
       </div>
       <div class="refresh">
         <el-icon :size="20">
-          <refresh />
+          <refresh/>
         </el-icon>
       </div>
       <div class="path">
@@ -22,17 +22,17 @@
     </div>
     <div class="msg-alert">
       <el-icon :size="20">
-        <bell />
+        <bell/>
       </el-icon>
     </div>
     <div class="user">
       <div class="head-img">
-        <img src="http://qiniu.bearlen.com/BEARLEN-03.png" alt="头像" />
+        <img src="http://qiniu.bearlen.com/BEARLEN-03.png" alt="头像"/>
       </div>
       <div class="user-name">
         <span class="name">弦月</span>
         <el-icon>
-          <arrow-down-bold />
+          <arrow-down-bold/>
         </el-icon>
       </div>
       <div class="more">
@@ -71,16 +71,17 @@ export default {
 <style lang="scss" scoped>
 
 .container {
+  height: 60px;
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  height: 100%;
-  border-bottom: 1px solid #cbcbcb;
+  //height: 100%;
+  border-bottom: 1px solid #e3e3e3;
   background-color: white;
   box-sizing: border-box;
-  padding: 0 20px;
+  padding-right: 20px;
   color: #606266;
 
   .page-info {

@@ -49,59 +49,59 @@ export default {
       menuList: [
         {
           name: "控制面板", iconType: 1, index: "1", iconClass: "odometer", childMenu: [
-            { name: "工作台", iconType: 1, index: "1-1", iconClass: "monitor", url: "/dashboard/workplace" },
-            { name: "分析页", iconType: 1, index: "1-2", iconClass: "data-analysis", url: "/dashboard/analysis" },
-            { name: "监控页", iconType: 1, index: "1-3", iconClass: "camera", url: "/dashboard/monitor" }
+            {name: "工作台", iconType: 1, index: "1-1", iconClass: "monitor", url: "/dashboard/workplace"},
+            {name: "分析页", iconType: 1, index: "1-2", iconClass: "data-analysis", url: "/dashboard/analysis"},
+            {name: "监控页", iconType: 1, index: "1-3", iconClass: "camera", url: "/dashboard/monitor"}
           ]
         }, {
           name: "系统管理", iconType: 1, index: "2", iconClass: "setting", childMenu: [
-            { name: "用户管理", iconType: 2, index: "2-1", iconClass: "icon-huiyuan1", url: "" },
-            { name: "角色管理", iconType: 2, index: "2-2", iconClass: "icon-jiaoseguanli", url: "" },
-            { name: "菜单管理", iconType: 2, index: "2-3", iconClass: "icon-caidan", url: "" },
-            { name: "职级管理", iconType: 2, index: "2-4", iconClass: "icon-zhiweiguanli", url: "" },
-            { name: "岗位管理", iconType: 2, index: "2-5", iconClass: "icon-gangwei", url: "" },
-            { name: "部门管理", iconType: 1, index: "2-6", iconClass: "office-building", url: "" },
-            { name: "登录日志", iconType: 1, index: "2-7", iconClass: "document", url: "" },
-            { name: "操作日志", iconType: 2, index: "2-8", iconClass: "icon-wj-rz", icon: "", url: "" }
+            {name: "用户管理", iconType: 2, index: "2-1", iconClass: "icon-huiyuan1", url: ""},
+            {name: "角色管理", iconType: 2, index: "2-2", iconClass: "icon-jiaoseguanli", url: ""},
+            {name: "菜单管理", iconType: 2, index: "2-3", iconClass: "icon-caidan", url: ""},
+            {name: "职级管理", iconType: 2, index: "2-4", iconClass: "icon-zhiweiguanli", url: ""},
+            {name: "岗位管理", iconType: 2, index: "2-5", iconClass: "icon-gangwei", url: ""},
+            {name: "部门管理", iconType: 1, index: "2-6", iconClass: "office-building", url: ""},
+            {name: "登录日志", iconType: 1, index: "2-7", iconClass: "document", url: ""},
+            {name: "操作日志", iconType: 2, index: "2-8", iconClass: "icon-wj-rz", icon: "", url: ""}
           ]
         }, {
           name: "数据中心", iconType: 2, index: "3", iconClass: "icon-shujuzhongxin", childMenu: [
-            { name: "字典管理", iconType: 2, index: "3-1", iconClass: "icon-zidianguanli", url: "" },
-            { name: "城市管理", iconType: 1, index: "3-2", iconClass: "OfficeBuilding", url: "" },
-            { name: "配置管理", iconType: 2, index: "3-3", iconClass: "icon-xitongshezhi", url: "" },
-            { name: "通知公告", iconType: 1, index: "3-4", iconClass: "bell", url: "" },
-            { name: "友链管理", iconType: 2, index: "3-5", iconClass: "icon-youqinglianjie", url: "" }
+            {name: "字典管理", iconType: 2, index: "3-1", iconClass: "icon-zidianguanli", url: ""},
+            {name: "城市管理", iconType: 1, index: "3-2", iconClass: "OfficeBuilding", url: ""},
+            {name: "配置管理", iconType: 2, index: "3-3", iconClass: "icon-xitongshezhi", url: ""},
+            {name: "通知公告", iconType: 1, index: "3-4", iconClass: "bell", url: ""},
+            {name: "友链管理", iconType: 2, index: "3-5", iconClass: "icon-youqinglianjie", url: ""}
           ]
         }, {
           name: "个人中心", iconType: 1, index: "4", iconClass: "user", childMenu: [
-            { name: "个人资料", iconType: 2, index: "4-1", iconClass: "icon-gerenziliao", url: "" }
+            {name: "个人资料", iconType: 2, index: "4-1", iconClass: "icon-gerenziliao", url: ""}
           ]
         }, {
           name: "运营中心", iconType: 2, index: "5", iconClass: "icon-yunyingzhongxin", childMenu: [
-            { name: "广告位管理", iconType: 2, index: "5-1", iconClass: "icon-guanggaoweishezhi", url: "" },
-            { name: "广告管理", iconType: 2, index: "5-2", iconClass: "icon-guanggaoguanli", url: "" },
-            { name: "布局描述管理", iconType: 2, index: "5-3", iconClass: "icon-buju", url: "" },
-            { name: "布局管理", iconType: 2, index: "5-4", iconClass: "icon-buju", url: "" }
+            {name: "广告位管理", iconType: 2, index: "5-1", iconClass: "icon-guanggaoweishezhi", url: ""},
+            {name: "广告管理", iconType: 2, index: "5-2", iconClass: "icon-guanggaoguanli", url: ""},
+            {name: "布局描述管理", iconType: 2, index: "5-3", iconClass: "icon-buju", url: ""},
+            {name: "布局管理", iconType: 2, index: "5-4", iconClass: "icon-buju", url: ""}
           ]
         }, {
           name: "内容管理", iconType: 2, index: "6", iconClass: "icon-icon", childMenu: [
-            { name: "广告位管理", iconType: 2, index: "6-1", iconClass: "icon-guanggaoweishezhi", url: "" },
-            { name: "广告管理", iconType: 2, index: "6-2", iconClass: "icon-guanggaoguanli", url: "" },
-            { name: "布局描述管理", iconType: 2, index: "6-3", iconClass: "icon-buju", url: "" },
-            { name: "布局管理", iconType: 2, index: "6-4", iconClass: "icon-buju", url: "" }
+            {name: "广告位管理", iconType: 2, index: "6-1", iconClass: "icon-guanggaoweishezhi", url: ""},
+            {name: "广告管理", iconType: 2, index: "6-2", iconClass: "icon-guanggaoguanli", url: ""},
+            {name: "布局描述管理", iconType: 2, index: "6-3", iconClass: "icon-buju", url: ""},
+            {name: "布局管理", iconType: 2, index: "6-4", iconClass: "icon-buju", url: ""}
           ]
         }, {
           name: "会员管理", iconType: 2, index: "7", iconClass: "icon-huiyuan1", childMenu: [
-            { name: "会员等级", iconType: 2, index: "7-1", iconClass: "icon-huiyuandengji", url: "" },
-            { name: "会员管理", iconType: 2, index: "7-2", iconClass: "icon-huiyuan1", url: "" }
+            {name: "会员等级", iconType: 2, index: "7-1", iconClass: "icon-huiyuandengji", url: ""},
+            {name: "会员管理", iconType: 2, index: "7-2", iconClass: "icon-huiyuan1", url: ""}
           ]
         }, {
           name: "系统设置", iconType: 2, index: "8", iconClass: "icon-xitongshezhi", childMenu: [
-            { name: "网站设置", iconType: 2, index: "8-1", iconClass: "icon-shuangchilun", url: "" }
+            {name: "网站设置", iconType: 2, index: "8-1", iconClass: "icon-shuangchilun", url: ""}
           ]
         }, {
           name: "系统工具", iconType: 2, index: "9", iconClass: "icon-gongju", childMenu: [
-            { name: "代码生成", iconType: 2, index: "9-1", iconClass: "icon-daimashengcheng", url: "" }
+            {name: "代码生成", iconType: 2, index: "9-1", iconClass: "icon-daimashengcheng", url: ""}
           ]
         }
       ]
@@ -139,6 +139,11 @@ export default {
   .el-menu-vertical {
     background-color: rgba(0, 0, 0, 0);
     border: none;
+  }
+
+  .el-menu-item.is-active {
+    background-color: var(--el-menu-active-color);
+    color: #fff
   }
 
 
