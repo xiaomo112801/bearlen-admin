@@ -138,25 +138,5 @@ export default {
     padding: 0 10px;
   }
 
-  .el-row {
-    height: 100%;
-    flex: 1;
-
-  }
-
-
-  .el-col {
-    padding: 0 10px;
-    font-size: 14px;
-    text-align: center;
-    height: 40px;
-    line-height: 40px;
-
-    &:hover {
-      background-color: #ddecff;
-      color: var(--el-color-primary);
-      border-bottom: 2px solid var(--el-color-primary);
-    }
-  }
 }
 </style>
