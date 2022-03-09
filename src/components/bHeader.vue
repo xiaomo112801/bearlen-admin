@@ -140,8 +140,8 @@ export default {
     }
 
     .head-img {
-      height: 45px;
-      width: 45px;
+      height: 30px;
+      width: 30px;
       overflow: hidden;
       display: flex;
       align-items: center;
