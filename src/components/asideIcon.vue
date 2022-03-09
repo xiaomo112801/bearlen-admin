@@ -8,7 +8,7 @@ export default {
   render() {
     const ELicon = resolveComponent(this.icon)
     return h(
-      ELicon
+        ELicon
     )
   }
 }

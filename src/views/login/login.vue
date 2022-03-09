@@ -10,7 +10,7 @@
             <el-input icon="" v-model="form.username" :prefix-icon="Search" placeholder="请输入用户名">
               <template #prefix>
                 <el-icon class="el-input__icon">
-                  <user />
+                  <user/>
                 </el-icon>
               </template>
             </el-input>
@@ -19,7 +19,7 @@
             <el-input v-model="form.password" placeholder="请输入密码">
               <template #prefix>
                 <el-icon class="el-input__icon">
-                  <unlock />
+                  <unlock/>
                 </el-icon>
               </template>
             </el-input>
@@ -33,9 +33,7 @@
               </template>
             </el-input>
           </el-form-item>
-
           <el-button type="primary" class="btn" auto-insert-space="true">登录</el-button>
-
         </el-form>
       </el-col>
     </el-row>
@@ -43,7 +41,7 @@
 </template>
 
 <script>
-import { Unlock, User } from "@element-plus/icons-vue"
+import {Unlock, User} from "@element-plus/icons-vue"
 
 export default {
   name: "login",
@@ -126,7 +124,7 @@ export default {
       border-image: -moz-linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 30 30;
       border-image: linear-gradient(rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)) 30 30;
       box-sizing: border-box;
-      padding:10px 0;
+      padding: 10px 0;
 
       .vertication {
         display: flex;
