@@ -6,8 +6,8 @@
       </el-col>
       <el-col :span="10">
         <el-form label-width="" :rules="rule">
-          <el-form-item label="" class="label-color">
-            <el-input icon="" v-model="form.username" :prefix-icon="Search" placeholder="请输入用户名">
+          <el-form-item label="">
+            <el-input v-model="form.username" placeholder="请输入用户名">
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <user/>
@@ -15,7 +15,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item label="" class="label-color">
+          <el-form-item label="">
             <el-input v-model="form.password" placeholder="请输入密码">
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -24,7 +24,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item label="" class="vertication label-color">
+          <el-form-item label="">
             <el-input v-model="form.verficationCode" placeholder="请输入验证码">
               <template #prefix>
                 <el-icon class="el-input__icon iconfont icon-yanzhengma">
@@ -33,7 +33,9 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-button type="primary" class="btn" auto-insert-space="true">登录</el-button>
+          <el-form-item label="" class="btn">
+            <el-button type="primary" class="" :auto-insert-space="true">登录</el-button>
+          </el-form-item>
         </el-form>
       </el-col>
     </el-row>
@@ -41,7 +43,7 @@
 </template>
 
 <script>
-import {Unlock, User} from "@element-plus/icons-vue"
+import { Unlock, User } from "@element-plus/icons-vue"
 
 export default {
   name: "login",
@@ -94,10 +96,10 @@ export default {
     -webkit-background-size: cover;
     -o-background-size: cover;
     background-attachment: fixed;
-    -webkit-filter: blur(14px);
-    -ms-filter: blur(14px);
-    filter: blur(14px);
-    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    background-color: rgba(255, 255, 255, 1);
     z-index: 1;
   }
 
@@ -110,8 +112,12 @@ export default {
     padding: 0 15px;
 
     .btn {
-      width: 197px;
-      margin-top: 10px;
+      max-width: 197px;
+      width: 100%;
+
+      button {
+        flex: 1
+      }
     }
 
     .el-form {
@@ -126,14 +132,6 @@ export default {
       box-sizing: border-box;
       padding: 10px 0;
 
-      .vertication {
-        display: flex;
-        flex-direction: row;
-
-        .el-input__inner {
-          display: inline-flex !important;
-        }
-      }
 
       .el-form-item, .el-form-item--default {
         display: flex;

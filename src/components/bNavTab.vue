@@ -74,25 +74,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep.el-tabs--card > .el-tabs__header .el-tabs__nav {
+:deep.el-tabs--card > .el-tabs__header .el-tabs__nav {
   background-color: rgba(0, 0, 0, 0) !important;
   border: none !important;
   margin: 0;
 }
 
-::v-deep.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+:deep.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
   border-bottom-color: #fff;
   background-color: #ddecff;
   color: var(--el-color-primary);
   border-bottom: 2px solid var(--el-color-primary);
 }
 
-::v-deep.el-tabs--card > .el-tabs__header {
+:deep.el-tabs--card > .el-tabs__header {
   border: none;
   margin: 0;
 }
 
-::v-deep .el-tabs--card > .el-tabs__header .el-tabs__item {
+:deep .el-tabs--card > .el-tabs__header .el-tabs__item {
   border-left: none
 }
 
