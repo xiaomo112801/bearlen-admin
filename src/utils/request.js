@@ -9,6 +9,13 @@ const httpRequest = axios.create({
   }
 })
 
+const refreshAuthorization = (response) => {
+  const token = response.header.authorization
+  if (token) {
+    store.commit("changeToken", token)
+  }
+}
+
 httpRequest.interceptors.request.use(
   config => {
     const authorization = store.state.authorization ? store.state.authorization : ""
@@ -26,17 +33,25 @@ httpRequest.interceptors.request.use(
 
 httpRequest.interceptors.response.use(
   response => {
+    refreshAuthorization(response)
     if (response.data && response.data.code) {
+
       response.data.code = isNaN(response.data.code)
         ? response.data.code
         : parseInt(response.data.code)
+
+
     }
     return response.data
   },
   error => {
+    if (error.response.status === 401) {
+      localStorage.removeItem("authorization")
+    }
     return Promise.reject(error)
   }
 )
+
 
 export default {
   install(app) {

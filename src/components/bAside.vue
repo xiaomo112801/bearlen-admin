@@ -111,9 +111,9 @@ export default {
   methods: {
     setNavItem(menuItem) {
       console.log(menuItem)
-      const navItem = {
-        url: menuItem.index
-      }
+      // const navItem = {
+      //   url: menuItem.index
+      // }
     },
     handleOpen: (key, keyPath) => {
       console.log(key, keyPath)

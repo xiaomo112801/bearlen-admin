@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router"
+import store from "@/store/index"
 import base from "@/views/base"
 import login from "@/views/login/login"
 import workplace from "@/views/dashboard/workplace"
@@ -10,6 +11,9 @@ const routes = [
     path: "/",
     name: "/",
     component: base,
+    meta: {
+      checkLogin: true
+    },
     children: [
       {
         path: "/dashboard/workplace",
@@ -34,9 +38,25 @@ const routes = [
 
 ]
 
+
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(r => r.meta.checkLogin)) {
+    if (store.state.authorization) {
+      next()
+    } else {
+      next({
+        path: "/login",
+        query: { redirect: to.fullPath }
+      })
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
