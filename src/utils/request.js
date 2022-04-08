@@ -40,13 +40,12 @@ httpRequest.interceptors.response.use(
         ? response.data.code
         : parseInt(response.data.code)
 
-
     }
     return response.data
   },
   error => {
     if (error.response.status === 401) {
-      localStorage.removeItem("authorization")
+      store.commit("changeToken", "")
     }
     return Promise.reject(error)
   }
