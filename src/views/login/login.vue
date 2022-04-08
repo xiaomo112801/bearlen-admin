@@ -16,7 +16,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="">
-            <el-input v-model="form.password" placeholder="请输入密码">
+            <el-input type="password" v-model="form.password" placeholder="请输入密码">
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <unlock/>
