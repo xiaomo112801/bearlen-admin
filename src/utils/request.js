@@ -51,44 +51,46 @@ httpRequest.interceptors.response.use(
   }
 )
 
-
-export default {
-  install(app) {
-    app.config.globalProperties.$api = {
-      get: (url, data, header) => {
-        const requestConfig = {
-          url,
-          data
-        }
-        requestConfig.headers = {
-          ...header
-        }
-        requestConfig.params = data
-        return httpRequest(requestConfig)
-      },
-      post: (url, data, header = {}) => {
-        const requestConfig = {
-          url,
-          method: "post"
-        }
-        requestConfig.headers = {
-          ...header
-        }
-        if (
-          Object.prototype.toString
-            .call(data)
-            .match(/\s+(\w+)/)[1]
-            .toLowerCase() === "form-data"
-        ) {
-          requestConfig.data = data
-        } else {
-          requestConfig.data = data // 如果是application/x-www-form-urlencoded, 改为: qs.stringify(data)
-        }
-        return httpRequest(requestConfig)
-      }
+export const api = {
+  get: (url, data, header) => {
+    const requestConfig = {
+      url,
+      data
     }
+    requestConfig.headers = {
+      ...header
+    }
+    requestConfig.params = data
+    return httpRequest(requestConfig)
+  },
+  post: (url, data, header = {}) => {
+    const requestConfig = {
+      url,
+      method: "post"
+    }
+    requestConfig.headers = {
+      ...header
+    }
+    if (
+      Object.prototype.toString
+        .call(data)
+        .match(/\s+(\w+)/)[1]
+        .toLowerCase() === "form-data"
+    ) {
+      requestConfig.data = data
+    } else {
+      requestConfig.data = data // 如果是application/x-www-form-urlencoded, 改为: qs.stringify(data)
+    }
+    return httpRequest(requestConfig)
   }
 }
+
+
+// export default {
+//   install(app) {
+//     app.config.globalProperties.$api = api
+//   }
+// }
 
 
 

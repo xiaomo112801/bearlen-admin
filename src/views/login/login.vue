@@ -5,8 +5,8 @@
         <el-image src="http://qiniu.bearlen.com/BEAELEN-08.png"></el-image>
       </el-col>
       <el-col :span="10">
-        <el-form label-width="" :rules="rule">
-          <el-form-item label="">
+        <el-form label-width="" :rules="rule" :model="form" ref="formRef">
+          <el-form-item label="" prop="username">
             <el-input v-model="form.username" placeholder="请输入用户名">
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -15,7 +15,7 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item label="">
+          <el-form-item label="" prop="password">
             <el-input type="password" v-model="form.password" placeholder="请输入密码">
               <template #prefix>
                 <el-icon class="el-input__icon">
@@ -24,17 +24,16 @@
               </template>
             </el-input>
           </el-form-item>
-          <el-form-item label="">
+          <el-form-item label="" prop="verficationCode">
             <el-input v-model="form.verficationCode" placeholder="请输入验证码">
               <template #prefix>
                 <el-icon class="el-input__icon iconfont icon-yanzhengma">
-
                 </el-icon>
               </template>
             </el-input>
           </el-form-item>
           <el-form-item label="" class="btn">
-            <el-button type="primary" class="" :auto-insert-space="true">登录</el-button>
+            <el-button type="primary" @click="sign" :auto-insert-space="true">登录</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -42,27 +41,79 @@
   </el-container>
 </template>
 
-<script>
-import { Unlock, User } from "@element-plus/icons-vue"
+<script setup>
 
-export default {
-  name: "login",
-  data() {
-    return {
-      form: {
-        username: "",
-        password: "",
-        verficationCode: ""
-      },
-      rule: [
-        {}
-      ]
-    }
-  },
-  components: {
-    Unlock,
-    User
+import { reactive, ref, unref } from 'vue'
+import { api } from '@/utils/request'
+// import { FormInstance } from 'element-plus'
+
+
+const form = reactive({
+  username: '',
+  password: '',
+  verficationCode: ''
+})
+
+const formRef = ref()
+const pattern = new RegExp("[`~!@#$^&*()=|{}':;,.<>《》/?！\\[\\]￥…（）—【】‘；：”“。，、？]")
+const validatePass = (rule, value, callback) => {
+
+  if (value === '') {
+    callback(new Error('请输入密码'))
+  } else if (value.length < 8 || value.length > 16) {
+    callback(new Error('密码长度为8-16位'))
+  } else if (pattern.test(value)) {
+    callback(new Error('包含非法字符'))
+  } else {
+    callback()
   }
+}
+
+const validateUsername = (rule, value, callback) => {
+
+  if (value === '') {
+    callback(new Error('请输入用户名'))
+  } else if (pattern.test(value)) {
+    callback(new Error('包含非法字符'))
+  } else {
+    callback()
+  }
+}
+
+const validateVerficationCode = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('请输入验证码'))
+  } else {
+    callback()
+  }
+}
+
+const rule = reactive({
+  password: [{validator: validatePass, trigger: "blur"}],
+  username: [{validator: validateUsername, trigger: "blur"}],
+  verficationCode: [{validator: validateVerficationCode, trigger: "blur"}]
+})
+
+
+const sign = () => {
+  const signForm = unref(formRef)
+  if (!signForm) {
+    return
+  }
+  try {
+    signForm.validate((valid) => {
+      console.log(valid)
+      if (valid) {
+        return api.post("/admin/sign")
+      } else {
+        console.log('验证失败')
+        return false
+      }
+    })
+  } catch (e) {
+    console.log(e)
+  }
+
 }
 </script>
 
