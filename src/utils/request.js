@@ -10,9 +10,11 @@ const httpRequest = axios.create({
 })
 
 const refreshAuthorization = (response) => {
-  const token = response.header.authorization
-  if (token) {
-    store.commit("changeToken", token)
+  if(response.header!==undefined){
+    const token = response.header.authorization
+    if (token) {
+      store.commit("changeToken", token)
+    }
   }
 }
 

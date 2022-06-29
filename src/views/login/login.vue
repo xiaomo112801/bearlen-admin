@@ -22,16 +22,21 @@
                   <unlock/>
                 </el-icon>
               </template>
+
             </el-input>
           </el-form-item>
-          <el-form-item label="" prop="verficationCode">
-            <el-input v-model="form.verficationCode" placeholder="请输入验证码">
+          <el-form-item label="" class="" prop="verficationCode">
+            <el-input class="verify" v-model="form.verficationCode" placeholder="请输入验证码">
               <template #prefix>
                 <el-icon class="el-input__icon iconfont icon-yanzhengma">
                 </el-icon>
               </template>
             </el-input>
+            <div class="captcha-container">
+              <img :src="captcha" @click="getVerifyCode"/>
+            </div>
           </el-form-item>
+
           <el-form-item label="" class="btn">
             <el-button type="primary" @click="sign" :auto-insert-space="true">登录</el-button>
           </el-form-item>
@@ -45,14 +50,17 @@
 
 import { reactive, ref, unref } from 'vue'
 import { api } from '@/utils/request'
+import { ElMessage } from 'element-plus'
 // import { FormInstance } from 'element-plus'
 
 
 const form = reactive({
-  username: '',
-  password: '',
-  verficationCode: ''
+  username: 'xianyue',
+  password: '11111111',
+  verficationCode: '1231'
 })
+
+const captcha = ref("")
 
 const formRef = ref()
 const pattern = new RegExp("[`~!@#$^&*()=|{}':;,.<>《》/?！\\[\\]￥…（）—【】‘；：”“。，、？]")
@@ -95,6 +103,19 @@ const rule = reactive({
 })
 
 
+const getVerifyCode = () => {
+  return api.get("/admin/verify", {}, {
+    "content-type": "application/image"
+  }).then(res => {
+    captcha.value = `data:image/png;base64,${res.data}`
+    console.log(captcha)
+  })
+
+}
+
+getVerifyCode()
+
+
 const sign = () => {
   const signForm = unref(formRef)
   if (!signForm) {
@@ -102,18 +123,21 @@ const sign = () => {
   }
   try {
     signForm.validate((valid) => {
-      console.log(valid)
       if (valid) {
-        return api.post("/admin/sign")
+        return api.post("/admin/sign", form)
+            .then(res => {
+              if (res.code < 0) {
+                ElMessage.error(res.message)
+                getVerifyCode()
+              }
+            })
       } else {
-        console.log('验证失败')
         return false
       }
     })
   } catch (e) {
     console.log(e)
   }
-
 }
 </script>
 
@@ -121,6 +145,34 @@ const sign = () => {
 ::v-deep .label-color .el-form-item__label {
   color: white;
 }
+
+.captcha {
+  width: 100px;
+  height: 50px;
+}
+
+.el-col-8 {
+  height: 32px;
+  border-radius: 5px;
+}
+
+.captcha-container {
+  border-radius: 3px;
+  overflow: hidden;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  margin-left: 9px;
+
+}
+
+
+.verify {
+  width: 60%;
+  justify-content: space-between;
+
+}
+
 
 .el-container {
   width: 100%;
