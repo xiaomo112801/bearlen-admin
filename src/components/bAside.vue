@@ -110,16 +110,16 @@ export default {
   watch: {},
   methods: {
     setNavItem(menuItem) {
-      console.log(menuItem)
+      // console.log(menuItem)
       // const navItem = {
       //   url: menuItem.index
       // }
     },
     handleOpen: (key, keyPath) => {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     },
     handleClose: (key, keyPath) => {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     }
   },
   components: {

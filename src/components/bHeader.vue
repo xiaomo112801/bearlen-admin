@@ -31,19 +31,42 @@
       </div>
       <div class="user-name">
         <span class="name">弦月</span>
-        <el-icon>
+
+      </div>
+      <el-dropdown class="more" @command="handleCommand">
+        <el-icon el-dropdown-link>
           <arrow-down-bold/>
         </el-icon>
-      </div>
-      <div class="more">
-        <el-icon class="iconfont icon-gengduo" :size="25"></el-icon>
-      </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="userCenter">
+              <el-icon :size="16">
+                <user/>
+              </el-icon>
+              个人中心
+            </el-dropdown-item>
+            <el-dropdown-item command="editPassword">
+              <el-icon :size="16">
+                <key/>
+              </el-icon>
+              修改密码
+            </el-dropdown-item>
+            <el-dropdown-item divided command="loginOut">
+              <el-icon :size="16">
+                <switch-button/>
+              </el-icon>
+              退出登录
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>
 
 <script>
-import { ArrowDownBold, Bell, Fold, Refresh, Expand } from "@element-plus/icons-vue"
+import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
+
 
 export default {
   name: "bHeader",
@@ -53,12 +76,32 @@ export default {
     }
   },
   created() {
-    console.log(this.$route)
+    // console.log(this.$route)
   },
   methods: {
     setCollapse() {
       this.collapse = !this.collapse
       this.$emit("getCollapse", !this.collapse)
+    },
+    handleCommand(command) {
+      console.log()
+      if (typeof this[command] === 'function') {
+        this[command]()
+      }
+    },
+    editPassword() {
+
+    },
+    loginOut() {
+
+      return this.$api.post('/admin/loginOut')
+          .then(() => {
+
+            // this.$store.commit("changeToken", '')
+          })
+    },
+    userCenter() {
+
     }
   },
   computed: {
@@ -72,11 +115,13 @@ export default {
     Bell,
     Fold,
     Refresh,
-    Expand
+    Expand,
+    SwitchButton,
+    User,
+    Key
   }
 }
 </script>
-
 <style lang="scss" scoped>
 
 .container {
@@ -92,6 +137,7 @@ export default {
   box-sizing: border-box;
   padding-right: 20px;
   color: #606266;
+
 
   .page-info {
     flex: 1;
@@ -179,6 +225,8 @@ export default {
     .more {
       display: flex;
       align-items: center;
+
+
     }
   }
 

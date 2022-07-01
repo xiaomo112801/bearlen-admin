@@ -10,8 +10,8 @@ const httpRequest = axios.create({
 })
 
 const refreshAuthorization = (response) => {
-  if(response.header!==undefined){
-    const token = response.header.authorization
+  if(response.headers!==undefined){
+    const token = response.headers.authorization
     if (token) {
       store.commit("changeToken", token)
     }
@@ -21,7 +21,7 @@ const refreshAuthorization = (response) => {
 httpRequest.interceptors.request.use(
   config => {
     const authorization = store.state.authorization ? store.state.authorization : ""
-
+    console.log(store.state.authorization)
     if (authorization) {
       config.headers.authorization = authorization
     }
@@ -88,11 +88,11 @@ export const api = {
 }
 
 
-// export default {
-//   install(app) {
-//     app.config.globalProperties.$api = api
-//   }
-// }
+export default {
+  install(app) {
+    app.config.globalProperties.$api = api
+  }
+}
 
 
 

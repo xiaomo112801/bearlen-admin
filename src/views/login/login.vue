@@ -22,7 +22,6 @@
                   <unlock/>
                 </el-icon>
               </template>
-
             </el-input>
           </el-form-item>
           <el-form-item label="" class="" prop="verficationCode">
@@ -51,7 +50,8 @@
 import { reactive, ref, unref } from 'vue'
 import { api } from '@/utils/request'
 import { ElMessage } from 'element-plus'
-// import { FormInstance } from 'element-plus'
+import store from '@/store'
+import  router  from '@/router'
 
 
 const form = reactive({
@@ -108,10 +108,9 @@ const getVerifyCode = () => {
     "content-type": "application/image"
   }).then(res => {
     captcha.value = `data:image/png;base64,${res.data}`
-    console.log(captcha)
   })
-
 }
+
 
 getVerifyCode()
 
@@ -129,6 +128,9 @@ const sign = () => {
               if (res.code < 0) {
                 ElMessage.error(res.message)
                 getVerifyCode()
+              }
+              if (store.state.authorization) {
+                router.push('/')
               }
             })
       } else {
