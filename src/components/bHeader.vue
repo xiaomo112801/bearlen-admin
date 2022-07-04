@@ -93,11 +93,10 @@ export default {
 
     },
     loginOut() {
-
       return this.$api.post('/admin/loginOut')
           .then(() => {
-
-            // this.$store.commit("changeToken", '')
+            this.$store.commit("changeToken", '')
+            this.$router.push('/login')
           })
     },
     userCenter() {

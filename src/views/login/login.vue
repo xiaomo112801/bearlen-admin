@@ -37,7 +37,7 @@
           </el-form-item>
 
           <el-form-item label="" class="btn">
-            <el-button type="primary" @click="sign" :auto-insert-space="true">登录</el-button>
+            <el-button type="primary" @click="sign" @keyup.enter="sign" :auto-insert-space="true">登录</el-button>
           </el-form-item>
         </el-form>
       </el-col>
@@ -111,9 +111,7 @@ const getVerifyCode = () => {
   })
 }
 
-
 getVerifyCode()
-
 
 const sign = () => {
   const signForm = unref(formRef)
