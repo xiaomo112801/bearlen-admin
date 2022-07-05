@@ -10,14 +10,21 @@
           v-model="editableTabsValue"
           type="card"
           class="nav-tabs"
-          closable
           @tab-remove="removeTab"
+
       >
+        <el-tab-pane
+            key="1"
+            label="主页"
+            name="1"
+            :closable="false"
+        ></el-tab-pane>
         <el-tab-pane
             v-for="item in editableTabs"
             :key="item.name"
             :label="item.title"
             :name="item.name"
+            :closable="true"
         ></el-tab-pane>
       </el-tabs>
     </el-row>
@@ -36,23 +43,17 @@ export default {
     return {
       editableTabs: [
         {
-          title: '主页',
-          name: '1',
-          content: 'Tab 1 content',
-        },
-        {
           title: 'Tab 2',
           name: '2',
           content: 'Tab 2 content',
         },
       ],
-      editableTabsValue: 2,
+      editableTabsValue: "1",
 
     }
   },
   methods: {
     removeTab(targetName) {
-
       const tabs = this.editableTabs
       let activeName = this.editableTabsValue
       if (activeName === targetName) {
@@ -74,27 +75,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-:deep.el-tabs--card > .el-tabs__header .el-tabs__nav {
-  background-color: rgba(0, 0, 0, 0) !important;
-  border: none !important;
-  margin: 0;
+:deep .el-tabs--card {
+  & > .el-tabs__header {
+    .el-tabs__nav {
+      background-color: rgba(0, 0, 0, 0) !important;
+      border: none !important;
+      margin: 0;
+    }
+
+    .el-tabs__item.is-active {
+      border-bottom-color: #fff;
+      background-color: #ddecff;
+      color: var(--el-color-primary);
+      border-bottom: 2px solid var(--el-color-primary);
+    }
+  }
 }
 
-:deep.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
-  border-bottom-color: #fff;
-  background-color: #ddecff;
-  color: var(--el-color-primary);
-  border-bottom: 2px solid var(--el-color-primary);
+:deep .el-tabs--card {
+  & > .el-tabs__header {
+    border: none;
+    margin: 0;
+
+    .el-tabs__item {
+      border-left: none
+    }
+  }
+
+  .el-tabs__item {
+    border-left: none
+  }
 }
 
-:deep.el-tabs--card > .el-tabs__header {
-  border: none;
-  margin: 0;
-}
-
-:deep .el-tabs--card > .el-tabs__header .el-tabs__item {
-  border-left: none
-}
 
 .el-tabs {
   height: 40px;

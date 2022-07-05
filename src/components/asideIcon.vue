@@ -6,14 +6,11 @@ export default {
     icon: String
   },
   render() {
-    const ELicon = resolveComponent(this.icon)
+    const icon = this.icon || 'monitor'
+    const ELicon = resolveComponent(icon)
     return h(
         ELicon
     )
   }
 }
 </script>
-
-<style scoped>
-
-</style>
