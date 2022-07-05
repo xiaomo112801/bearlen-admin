@@ -68,6 +68,7 @@ export default {
           })
     },
     setNavItem(menuItem) {
+      this.$store.commit('addNavMenu',menuItem)
       console.log(menuItem)
     },
     handleOpen: (key, keyPath) => {

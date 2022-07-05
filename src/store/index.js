@@ -1,4 +1,5 @@
 import { createStore } from "vuex"
+import menu from 'menu/menu'
 
 export default createStore({
   state: {
@@ -6,10 +7,12 @@ export default createStore({
   },
   mutations: {
     changeToken(state, token) {
-      localStorage.setItem("authorization",token)
+      localStorage.setItem("authorization", token)
       return state.authorization = token
     }
   },
   actions: {},
-  modules: {}
+  modules: {
+    menu
+  }
 })
