@@ -63,7 +63,6 @@ export default {
   watch: {},
   methods: {
     getMenuList() {
-
       this.$api.get("/admin/getMenuList")
           .then(res => {
             this.menuList = res.data
@@ -78,6 +77,7 @@ export default {
     },
     setNavItem(menuItem) {
       this.$store.commit('addNavMenu', menuItem)
+      this.$store.commit('changeActiveNav',menuItem.name)
     }
   },
   components: {

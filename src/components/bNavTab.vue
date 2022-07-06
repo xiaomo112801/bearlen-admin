@@ -39,16 +39,19 @@
 <script>
 export default {
   name: "bNavTab",
-  data() {
-    return {
-
-      editableTabsValue: "1",
-
-    }
-  },
+  // data() {
+  //   return {
+  //
+  //     editableTabsValue: "1",
+  //
+  //   }
+  // },
   computed: {
     navList() {
       return this.$store.state.menu.navMenu
+    },
+    editableTabsValue() {
+      return this.$store.state.menu.activeNav
     }
   },
   methods: {

@@ -1,7 +1,8 @@
 export default {
   state: () => {
     return {
-      navMenu: localStorage.getItem('navMenu') ? JSON.parse(localStorage.getItem('navMenu')) : []
+      navMenu: localStorage.getItem('navMenu') ? JSON.parse(localStorage.getItem('navMenu')) : [],
+      activeNav: localStorage.getItem('activeNav') ? localStorage.getItem('activeNav') : '1'
     }
   },
   mutations: {
@@ -17,6 +18,10 @@ export default {
       })
       state.navMenu = navMenu
       localStorage.setItem('navMenu', JSON.stringify(navMenu))
+    },
+    changeActiveNav(state, activeNav) {
+      state.activeNav = activeNav
+      localStorage.setItem('activeNav', activeNav)
     }
   },
   getters: {
