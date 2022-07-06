@@ -1,19 +1,30 @@
 export default {
   state: () => {
     return {
-      navMenu: localStorage.getItem('navMenu') ? localStorage.getItem('navMenu') : []
+      navMenu: localStorage.getItem('navMenu') ? JSON.parse(localStorage.getItem('navMenu')) : []
     }
   },
   mutations: {
     addNavMenu(state, navItem) {
-      state.navMenu.push(navItem)
-      localStorage.setItem('navMenu', state.navMenu)
+      if (this.getters.navItemCount(navItem) === 0) {
+        state.navMenu.push(navItem)
+        localStorage.setItem('navMenu', JSON.stringify(state.navMenu))
+      }
     },
-    closeNavMenu(state, navItem) {
+    closeNavMenu(state, navName) {
       const navMenu = state.navMenu.filter(item => {
-        return item !== navItem
+        return item.title !== navName
       })
-      localStorage.setItem('navMenu', navMenu)
+      state.navMenu = navMenu
+      localStorage.setItem('navMenu', JSON.stringify(navMenu))
+    }
+  },
+  getters: {
+    navItemCount: (state) => (navItem) => {
+      const navItemArr = state.navMenu.filter(item => {
+        return item.url === navItem.url
+      })
+      return navItemArr.length
     }
   }
 }

@@ -8,7 +8,7 @@
         <el-menu background-color="#191a23" text-color="#ffffff"
                  active-text-color="#1890ff" :unique-opened="true"
                  default-active="/dashboard/workplace" :default-openeds="['0']" class="el-menu-vertical"
-                 @open="handleOpen" @close="handleClose" :router="true"
+                 :router="true"
                  :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="item.index">
             <template #title>
@@ -20,7 +20,7 @@
             </template>
             <template v-if="item.childMenu">
               <el-menu-item v-for="(val,childIndex) in item.childMenu" :key="childIndex"
-                            :index="val.url" :name="val.title" @click="setNavItem">
+                            :index="val.url" :name="val.title" @click="setNavItem({title:val.title,url:val.url,name:val.title})">
                 <template #title>
                   <el-icon v-if="val.type=== 2" class="el-icon iconfont" :class="val.icon"></el-icon>
                   <el-icon v-else>
@@ -78,13 +78,6 @@ export default {
     },
     setNavItem(menuItem) {
       this.$store.commit('addNavMenu', menuItem)
-      console.log(menuItem)
-    },
-    handleOpen: (key, keyPath) => {
-      console.log(key, keyPath)
-    },
-    handleClose: (key, keyPath) => {
-      console.log(key, keyPath)
     }
   },
   components: {
