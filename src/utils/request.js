@@ -44,7 +44,7 @@ httpRequest.interceptors.response.use(
   },
   error => {
     if (error.response.status === 401) {
-      store.commit("changeToken", "")
+      store.commit("changeToken", '')
     }
     if (error.response.status === 429) {
       ElMessage.error('请求过于频繁，请稍后再试')

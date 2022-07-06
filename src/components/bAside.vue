@@ -39,6 +39,7 @@
 
 <script>
 import asideIcon from "@/components/asideIcon"
+import { ElMessage } from "element-plus"
 
 export default {
   name: "bAside",
@@ -62,13 +63,21 @@ export default {
   watch: {},
   methods: {
     getMenuList() {
-      return this.$api.get("/admin/getMenuList")
+
+      this.$api.get("/admin/getMenuList")
           .then(res => {
             this.menuList = res.data
           })
+          .catch(error => {
+            if (error.response.status === 500) {
+              ElMessage.error('当前登录已失效')
+              this.$store.commit('changeToken', '')
+              this.$router.push('/login')
+            }
+          })
     },
     setNavItem(menuItem) {
-      this.$store.commit('addNavMenu',menuItem)
+      this.$store.commit('addNavMenu', menuItem)
       console.log(menuItem)
     },
     handleOpen: (key, keyPath) => {

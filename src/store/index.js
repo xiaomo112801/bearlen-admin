@@ -1,5 +1,5 @@
 import { createStore } from "vuex"
-import menu from 'menu/menu'
+import menu from './menu/menu'
 
 export default createStore({
   state: {
