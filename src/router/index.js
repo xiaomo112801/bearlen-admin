@@ -6,6 +6,7 @@ import workplace from "@/views/dashboard/workplace"
 import analysis from "@/views/dashboard/analysis"
 import monitor from "@/views/dashboard/monitor"
 import index from "@/views/index/index"
+import role from "@/views/system/role"
 
 const routes = [
   {
@@ -32,6 +33,10 @@ const routes = [
         path: "/index",
         name: "index",
         component: index
+      }, {
+        path: "/system/role",
+        name: "role",
+        component: role
       }
     ]
   },
