@@ -10,7 +10,7 @@
       <div class="nav-tab">
         <b-nav-tab :navItem="navItem"></b-nav-tab>
       </div>
-      <el-main>
+      <el-main class="main">
         <router-view></router-view>
       </el-main>
     </el-container>
@@ -69,5 +69,21 @@ export default {
 .container {
   height: 100vh;
   color: #606266;
+  overflow:hidden
+}
+
+.main {
+  height: calc(100vh - 120px);
+  padding:10px;
+  overflow: hidden;
+  .main-container {
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    height:100%;
+    box-shadow:0 0 15px #e3e3e3;
+  }
+
+
 }
 </style>

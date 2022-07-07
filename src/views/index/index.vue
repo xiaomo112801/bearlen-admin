@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="main-container">
     这是首页
   </el-container>
 </template>

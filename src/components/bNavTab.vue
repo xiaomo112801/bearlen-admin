@@ -39,13 +39,6 @@
 <script>
 export default {
   name: "bNavTab",
-  // data() {
-  //   return {
-  //
-  //     editableTabsValue: "1",
-  //
-  //   }
-  // },
   computed: {
     navList() {
       return this.$store.state.menu.navMenu

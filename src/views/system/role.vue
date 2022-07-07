@@ -1,5 +1,5 @@
 <template>
-  <el-container class="container">
+  <el-container class="main-container">
     角色管理
   </el-container>
 </template>
@@ -12,7 +12,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  background-color: white;
-}
+
 </style>

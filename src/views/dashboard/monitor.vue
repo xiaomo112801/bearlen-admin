@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="main-container">
     监控页面
   </el-container>
 </template>

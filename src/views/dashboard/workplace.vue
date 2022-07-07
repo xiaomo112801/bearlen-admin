@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="main-container">
     工作台页面
   </el-container>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="main-container">
     分析页面
   </el-container>
 </template>
