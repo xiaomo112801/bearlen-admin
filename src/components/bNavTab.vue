@@ -69,12 +69,14 @@ export default {
       const name = pane.props.name
       if (name === '1') {
         this.$router.push('/dashboard/workplace')
+
       } else {
         const navItme = this.navList.filter(item => {
           return item.name === name
         })
         this.$router.push(navItme[0].url)
       }
+      this.$store.commit('changeActiveNav', name)
     }
   }
 }

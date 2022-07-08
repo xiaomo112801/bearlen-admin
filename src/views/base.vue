@@ -69,21 +69,30 @@ export default {
 .container {
   height: 100vh;
   color: #606266;
-  overflow:hidden
+  overflow: hidden
 }
 
 .main {
   height: calc(100vh - 120px);
-  padding:10px;
+  padding: 5px;
   overflow: hidden;
+
   .main-container {
     background-color: white;
     border-radius: 5px;
-    padding: 10px;
-    height:100%;
-    box-shadow:0 0 15px #e3e3e3;
+    padding: 15px;
+    height: 100%;
+    box-shadow: 0 0 15px #e3e3e3;
   }
 
+  --el-main-padding: 15px !important;
+
+  .page {
+    padding: 10px 0;
+    display: flex;
+    width: 100%;
+    justify-content: right;
+  }
 
 }
 </style>
