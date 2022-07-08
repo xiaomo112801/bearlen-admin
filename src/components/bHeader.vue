@@ -13,11 +13,7 @@
         </el-icon>
       </div>
       <div class="path">
-        <router-view class="main" path="/"><span>主页</span></router-view>
-        <span>/</span>
-        <span>控制面板</span>
-        <span>/</span>
-        <span class="currentPage">工作台</span>
+        <b-breadrumb></b-breadrumb>
       </div>
     </div>
     <div class="msg-alert">
@@ -66,7 +62,7 @@
 
 <script>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
-
+import bBreadrumb from '@/components/bBreadrumb'
 
 export default {
   name: "bHeader",
@@ -117,7 +113,8 @@ export default {
     Expand,
     SwitchButton,
     User,
-    Key
+    Key,
+    bBreadrumb
   }
 }
 </script>
@@ -224,12 +221,8 @@ export default {
     .more {
       display: flex;
       align-items: center;
-
-
     }
   }
-
-
 }
 
 </style>

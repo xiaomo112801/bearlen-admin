@@ -88,10 +88,13 @@ export default {
   --el-main-padding: 15px !important;
 
   .page {
-    padding: 10px 0;
     display: flex;
     width: 100%;
-    justify-content: right;
+    justify-content: center;
+  }
+
+  .el-table{
+    flex: 1;
   }
 
 }
