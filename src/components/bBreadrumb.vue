@@ -1,9 +1,9 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
-    <el-breadcrumb-item
-    ><a href="/">promotion management</a></el-breadcrumb-item
-    >
+    <el-breadcrumb-item>
+      <a href="/">promotion management</a>
+    </el-breadcrumb-item>
     <el-breadcrumb-item>promotion list</el-breadcrumb-item>
     <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
   </el-breadcrumb>
@@ -12,7 +12,7 @@
 <script setup>
 
 import router from '@/router/index'
-import { computed,ref } from "vue"
+import { computed, ref } from "vue"
 
 const path = ref(router.currentRoute.value)
 
@@ -21,13 +21,11 @@ const routerPath = computed({
     return path.value.fullPath
   },
   set: (val) => {
-
-     return val
+    return val
   }
 })
 
 console.log(routerPath.value)
-
 
 </script>
 

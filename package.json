@@ -18,7 +18,7 @@
     "element-plus": "^2.2.8",
     "event-pubsub": "^5.0.3",
     "templates.js": "^0.3.11",
-    "vue": "^3.0.0",
+    "vue": "^3.2.37",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

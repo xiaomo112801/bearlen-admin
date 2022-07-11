@@ -48,7 +48,6 @@ httpRequest.interceptors.response.use(
     }
     if (error.response.status === 429) {
       ElMessage.error('请求过于频繁，请稍后再试')
-      return false
     }
     return Promise.reject(error)
   }

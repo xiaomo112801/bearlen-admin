@@ -51,8 +51,9 @@ import { reactive, ref, unref } from 'vue'
 import { api } from '@/utils/request'
 import { ElMessage } from 'element-plus'
 import store from '@/store'
-import  router  from '@/router'
-
+import router from '@/router'
+// import { getCurrentInstance } from 'vue'
+// const { appContext } = getCurrentInstance()
 
 const form = reactive({
   username: 'xianyue',
@@ -124,7 +125,7 @@ const sign = () => {
         return api.post("/admin/sign", form)
             .then(res => {
               if (res.code < 0) {
-                ElMessage.error(res.message)
+                ElMessage.error({appendTo:document.body,message:res.message})
                 getVerifyCode()
               }
               if (store.state.authorization) {
