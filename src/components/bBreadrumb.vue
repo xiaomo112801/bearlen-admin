@@ -19,13 +19,11 @@ const breadcrumb = ref([])
 watchEffect(() => {
   const pathArr = router.currentRoute.value.fullPath.split('/').slice(1)
   pathArr.map((item, index) => {
-
     breadcrumb.value[index] = store.state.menu.navMenu.filter(val => {
       if (val.title === `/${item}`) {
         return val
       }
     })
-
   })
 })
 
