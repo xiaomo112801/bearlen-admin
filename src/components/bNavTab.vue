@@ -43,33 +43,23 @@ export default {
     navList() {
       return this.$store.state.menu.navMenu
     },
-    editableTabsValue() {
-      return this.$store.state.menu.activeNav
+    editableTabsValue: {
+      get() {
+        return this.$store.state.menu.activeNav
+      },
+      set() {
+        return this.$store.state.menu.activeNav
+      }
     }
   },
   methods: {
     removeTab(targetName) {
-      const tabs = this.navList
-      let activeName = this.editableTabsValue
-      if (activeName === targetName) {
-        tabs.forEach((tab, index) => {
-          if (tab.name === targetName) {
-            const nextTab = tabs[index + 1] || tabs[index - 1]
-            if (nextTab) {
-              activeName = nextTab.name
-            }
-          }
-        })
-      }
-      this.editableTabsValue = activeName
       this.$store.commit('closeNavMenu', targetName)
-      // this.navList = tabs.filter((tab) => tab.name !== targetName)
     },
     pageNav(pane) {
       const name = pane.props.name
       if (name === '1') {
         this.$router.push('/dashboard/workplace')
-
       } else {
         const navItme = this.navList.filter(item => {
           return item.name === name

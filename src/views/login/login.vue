@@ -125,7 +125,7 @@ const sign = () => {
         return api.post("/admin/sign", form)
             .then(res => {
               if (res.code < 0) {
-                ElMessage.error({appendTo:document.body,message:res.message})
+                ElMessage.error(res.message)
                 getVerifyCode()
               }
               if (store.state.authorization) {

@@ -19,7 +19,7 @@
     "event-pubsub": "^5.0.3",
     "templates.js": "^0.3.11",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.0-0",
+    "vue-router": "^4.1.1",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {
