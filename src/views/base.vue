@@ -13,10 +13,7 @@
       <el-main class="main">
         <router-view></router-view>
       </el-main>
-      <el-footer>
-        <p>bearlen-admin</p>
-        <p>Copyright @ 2022 BEAELEN</p>
-      </el-footer>
+
     </el-container>
 
   </el-container>
@@ -79,13 +76,6 @@ export default {
   height: 100vh;
   color: #606266;
   overflow: hidden
-}
-
-.el-footer {
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .main {

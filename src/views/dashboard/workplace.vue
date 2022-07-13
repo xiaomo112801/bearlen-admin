@@ -36,7 +36,7 @@
       </div>
     </el-row>
 
-    <el-row :gutter="15" justify="center" align="middle" class="shortcut-menu">
+    <el-row :gutter="15" justify="center" align="middle" class="shortcut-menu" type="flex">
       <el-col :span="3" class="menu-item">
         <div class="col">
           <el-icon :size="32" class="el-icon iconfont icon-huiyuan1" color="#69c0ff"></el-icon>
@@ -103,6 +103,9 @@
                   v-for="(activity, index) in activities"
                   :key="index"
                   :timestamp="activity.timestamp"
+                  :type="activity.type"
+                  :size="activity.size"
+                  :hollow="activity.hollow"
               >
                 {{ activity.content }}
               </el-timeline-item>
@@ -113,23 +116,66 @@
       <el-col :span="8">
         <div class="col">
           <h2 class="board-title">升级计划</h2>
-          <div class="board-content"></div>
+          <div class="board-content">
+            <el-table :data="upgradePlan" style="width: 100%">
+              <el-table-column prop="date" label="Date" width="180"/>
+              <el-table-column prop="name" label="Name" width="180"/>
+              <el-table-column prop="address" label="Address"/>
+            </el-table>
+          </div>
         </div>
       </el-col>
       <el-col :span="8">
         <div class="col">
           <h2 class="board-title">本月计划</h2>
-          <div class="board-content"></div>
+          <div class="board-content center">
+            <el-progress type="dashboard" :width="200" class="progress" :percentage="percentage">
+              <template #default="{ percentage }">
+                <el-icon class="el-icon-tag">
+                  <Document/>
+                </el-icon>
+                <p class="percentage-label">{{ percentage }}</p>
+              </template>
+            </el-progress>
+            <span>本月进度已完成</span>
+          </div>
         </div>
       </el-col>
     </el-row>
 
+    <el-row :gutter="15" class="board">
+      <el-col :span="16">
+        <div class="col">
+          <h2 class="board-title">项目进度</h2>
+          <div class="board-content"></div>
+        </div>
+      </el-col>
+      <el-col :span="8">
+        <div class="col">
+          <h2 class="board-title">小组成员</h2>
+          <div class="board-content list">
+            <p v-for="item in teamMembers" :key="item">
+              <el-avatar class="avatar" :size="50" :src="item.avatar"></el-avatar>
+              <span class="userinfo">
+                <span class="username">  {{ item.username }}</span>
+                <span class="post"> {{ item.post }}</span>
+              </span>
+              <span :class="item.online === 1 ? 'online-status' : 'offline-status' ">{{
+                  item.online === 1 ? '在线' : '离线'
+                }}</span>
+            </p>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
+    <b-footer />
   </el-container>
 </template>
 
 <script setup>
 
 import { ref } from 'vue'
+import bFooter from '@/components/bFooter'
 import asideIcon from "@/components/asideIcon"
 
 const userInfo = ref({
@@ -137,20 +183,69 @@ const userInfo = ref({
   headimg: 'https://card.only99.cn/upload/user/1657504127266.png'
 })
 
-const activities = [
+const activities = ref([
   {
     content: 'Event start',
     timestamp: '2018-04-15',
+    size: 'normal',
+    type: 'primary'
   },
   {
     content: 'Approved',
     timestamp: '2018-04-13',
+    size: 'normal',
+    type: 'primary',
+    hollow: true,
   },
   {
     content: 'Success',
     timestamp: '2018-04-11',
   },
-]
+])
+
+const upgradePlan = ref([
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St',
+  },
+])
+
+const percentage = ref(10)
+
+const teamMembers = ref([
+  {
+    avatar: 'https://card.only99.cn/upload/user/1657504127266.png',
+    username: "欲瑶琴弦断",
+    online: 1,
+    post: '前端工程师 PHP后端工程师'
+  }, {
+    avatar: 'https://img2.woyaogexing.com/2017/07/21/773f38c112f81066!400x400_big.jpg',
+    username: "YoRHa 2B",
+    online: 1,
+    post: '前端工程师'
+  }, {
+    avatar: 'http://qiniu.bearlen.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220713140535.png',
+    username: "YoRHa command",
+    online: 2,
+    post: '前端工程师'
+  }
+])
 
 
 </script>
@@ -161,8 +256,10 @@ const activities = [
   display: flex;
   flex-direction: column;
 
+
   .el-row {
     margin-bottom: 15px;
+    flex-wrap: wrap;
 
     .col {
       background-color: white;
@@ -297,7 +394,83 @@ const activities = [
       border-bottom: 1px var(--el-border-color) solid;
       font-size: 14px;
     }
+
+    .board-content {
+      height: 318px;
+      box-sizing: border-box;
+      padding: 15px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+
+      .percentage-label {
+        padding: 10px;
+        font-size: 24px;
+      }
+
+    }
+
+    .list {
+      flex-direction: column;
+      font-size: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      p {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px var(--el-border-color) solid;
+        width: 100%;
+        padding: 15px;
+
+        span {
+          margin-right: 15px;
+        }
+
+        @mixin tag($color) {
+          padding: 5px 10px;
+          border-radius: 3px;
+          border: 1px $color solid;
+          color: $color
+        }
+
+
+        .online-status {
+          @include tag(#95d475)
+        }
+
+        .offline-status {
+          @include tag(#b1b3b8)
+        }
+
+        .userinfo {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+
+          .post {
+            color: #b1b3b8
+          }
+
+          span {
+            padding: 3px 0;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .center {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 14px;
+    }
   }
+
+
 }
 
 

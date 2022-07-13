@@ -10,7 +10,7 @@ body {
 button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, hr, input, legend, li, ol, p, pre, td, textarea, th, ul {
   margin: 0;
   padding: 0;
-  font-size:12px;
+  font-size: 12px;
   font-weight: normal;
 }
 
@@ -41,6 +41,21 @@ a {
     outline: 0;
     -moz-outline: 0;
     -webkit-outline: 0;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px
+}
+
+::-webkit-scrollbar-thumb {
+  opacity: 0.1;
+  //hover-opacity:0.5;
+  background-color: var(--el-text-color-secondary);
+  border-radius: 4px;
+
+  :hover {
+    opacity: 0.3;
   }
 }
 
