@@ -80,7 +80,7 @@ export default {
 
 .main {
   height: calc(100vh - 120px);
-  overflow: hidden;
+  //overflow: hidden;
   box-sizing: border-box;
 
   .main-container {

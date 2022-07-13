@@ -7,7 +7,7 @@
       <el-scrollbar height="calc(100vh - 60px)">
         <el-menu background-color="#191a23" text-color="#ffffff"
                  active-text-color="#1890ff" :unique-opened="true"
-                 :default-active="defaultActive" :default-openeds="[defaultOpened]" class="el-menu-vertical"
+                 :default-active="defaultActive" class="el-menu-vertical"
                  :router="true" @select="handleSelect"
                  :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="item.index">
@@ -50,10 +50,6 @@ export default {
   computed: {
     defaultActive() {
       return this.$store.state.menu.defaultActive
-    },
-    defaultOpened() {
-      console.log(this.$store.state.menu.defaultOpened)
-      return this.$store.state.menu.defaultOpened
     }
   },
   data() {

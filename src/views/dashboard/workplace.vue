@@ -53,7 +53,7 @@
     <el-row class="board" :gutter="15">
       <el-col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:8}">
         <div class="col">
-          <h2 class="board-title">动态更新</h2>
+          <h2 class="board-title">更新动态</h2>
           <div class="board-content">
             <el-timeline>
               <el-timeline-item

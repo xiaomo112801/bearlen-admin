@@ -6,7 +6,8 @@ const httpRequest = axios.create({
   timeout: 1000,
   headers: {
     "content-type": "application/json"
-  }
+  },
+  // baseURL: "http://www.bearlen.com/"
 })
 
 const refreshAuthorization = (response) => {

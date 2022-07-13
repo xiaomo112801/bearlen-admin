@@ -78,7 +78,6 @@ export default {
       this.$emit("getCollapse", !this.collapse)
     },
     handleCommand(command) {
-      console.log()
       if (typeof this[command] === 'function') {
         this[command]()
       }
@@ -99,7 +98,6 @@ export default {
   },
   computed: {
     routerPath() {
-      console.log(this.$router)
       return this.$router
     }
   },
