@@ -7,8 +7,8 @@
       <el-scrollbar height="calc(100vh - 60px)">
         <el-menu background-color="#191a23" text-color="#ffffff"
                  active-text-color="#1890ff" :unique-opened="true"
-                 default-active="/dashboard/workplace" :default-openeds="['0']" class="el-menu-vertical"
-                 :router="true"
+                 :default-active="defaultActive" :default-openeds="[defaultOpened]" class="el-menu-vertical"
+                 :router="true" @select="handleSelect"
                  :collapse="isCollapse" :collapse-transition="false">
           <el-sub-menu v-for="(item,index) in menuList" :key="index" :index="item.index">
             <template #title>
@@ -20,7 +20,8 @@
             </template>
             <template v-if="item.childMenu">
               <el-menu-item v-for="(val,childIndex) in item.childMenu" :key="childIndex"
-                            :index="val.url" :name="val.title" @click="setNavItem({title:val.title,url:val.url,name:val.title})">
+                            :index="val.url" :name="val.title"
+                            @click="setNavItem({title:val.title,url:val.url,name:val.title})">
                 <template #title>
                   <el-icon v-if="val.type=== 2" class="el-icon iconfont" :class="val.icon"></el-icon>
                   <el-icon v-else>
@@ -45,6 +46,15 @@ export default {
   name: "bAside",
   props: {
     isCollapse: Boolean
+  },
+  computed: {
+    defaultActive() {
+      return this.$store.state.menu.defaultActive
+    },
+    defaultOpened() {
+      console.log(this.$store.state.menu.defaultOpened)
+      return this.$store.state.menu.defaultOpened
+    }
   },
   data() {
     return {
@@ -77,7 +87,10 @@ export default {
     },
     setNavItem(menuItem) {
       this.$store.commit('addNavMenu', menuItem)
-      this.$store.commit('changeActiveNav',menuItem.name)
+      this.$store.commit('changeActiveNav', menuItem.name)
+    },
+    handleSelect(index) {
+      this.$store.commit('changeDefaultActive', index)
     }
   },
   components: {

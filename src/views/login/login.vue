@@ -52,8 +52,6 @@ import { api } from '@/utils/request'
 import { ElMessage } from 'element-plus'
 import store from '@/store'
 import router from '@/router'
-// import { getCurrentInstance } from 'vue'
-// const { appContext } = getCurrentInstance()
 
 const form = reactive({
   username: 'xianyue',

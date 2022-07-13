@@ -12,9 +12,6 @@
           <refresh/>
         </el-icon>
       </div>
-      <div class="path">
-        <b-breadrumb></b-breadrumb>
-      </div>
     </div>
     <div class="msg-alert">
       <el-icon :size="20">
@@ -62,7 +59,7 @@
 
 <script>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
-import bBreadrumb from '@/components/bBreadrumb'
+// import bBreadrumb from '@/components/bBreadrumb'
 
 
 export default {
@@ -114,8 +111,7 @@ export default {
     Expand,
     SwitchButton,
     User,
-    Key,
-    bBreadrumb
+    Key
   }
 }
 </script>

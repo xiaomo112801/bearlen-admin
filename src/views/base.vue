@@ -13,7 +13,12 @@
       <el-main class="main">
         <router-view></router-view>
       </el-main>
+      <el-footer>
+        <p>bearlen-admin</p>
+        <p>Copyright @ 2022 BEAELEN</p>
+      </el-footer>
     </el-container>
+
   </el-container>
 </template>
 
@@ -52,6 +57,10 @@ export default {
   box-shadow: 0 5px 5px #e3e3e3;
 }
 
+:deep.el-main {
+  overflow: hidden !important;
+}
+
 .el-header {
   color: var(--el-text-color-primary);
   text-align: center;
@@ -72,10 +81,17 @@ export default {
   overflow: hidden
 }
 
+.el-footer {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .main {
   height: calc(100vh - 120px);
-  padding: 5px;
   overflow: hidden;
+  box-sizing: border-box;
 
   .main-container {
     background-color: white;
@@ -93,7 +109,7 @@ export default {
     justify-content: center;
   }
 
-  .el-table{
+  .el-table {
     flex: 1;
   }
 
