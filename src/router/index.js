@@ -18,6 +18,11 @@ const routes = [
     },
     children: [
       {
+        path: "/",
+        name: "/",
+        component: workplace,
+      },
+      {
         path: "/dashboard/workplace",
         name: "workplace",
         component: workplace

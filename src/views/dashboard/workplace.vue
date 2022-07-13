@@ -37,64 +37,21 @@
     </el-row>
 
     <el-row :gutter="15" justify="center" align="middle" class="shortcut-menu" type="flex">
-      <el-col :span="3" class="menu-item">
+      <el-col :xs="{span:12}" :sm="{span:6}" :md="{span:3}" :xl="{span:3}" v-for="item in shortcutMenu" :key="item"
+              class="menu-item">
         <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-huiyuan1" color="#69c0ff"></el-icon>
-          <span>系统用户</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-jiaoseguanli" color="#95DE64"></el-icon>
-          <span>角色管理</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-caidan" color="#FF9C6E"></el-icon>
-          <span>菜单管理</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-zidianguanli" color="rgb(179, 127, 235)"></el-icon>
-          <span>字典管理</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-xitongshezhi" color="rgb(255, 214, 102)"></el-icon>
-          <span>配置管理</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" color="rgb(92, 219, 211)">
-            <aside-icon icon="bell"></aside-icon>
+          <el-icon v-if="item.type === 2" :size="32" class="el-icon iconfont" :class="item.icon"
+                   :color="item.color"></el-icon>
+          <el-icon :size="32" :color="item.color" v-else>
+            <aside-icon :icon="item.icon"></aside-icon>
           </el-icon>
-          <span>通知公告</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" class="el-icon iconfont icon-daimashengcheng" color="rgb(255, 133, 192)">
-            <aside-icon class="el-icon"></aside-icon>
-          </el-icon>
-          <span>代码生成</span>
-        </div>
-      </el-col>
-      <el-col :span="3" class="menu-item">
-        <div class="col">
-          <el-icon :size="32" color="rgb(255, 192, 105)">
-            <aside-icon icon="user"></aside-icon>
-          </el-icon>
-          <span>个人中心</span>
+          <span>{{ item.title }}</span>
         </div>
       </el-col>
     </el-row>
 
     <el-row class="board" :gutter="15">
-      <el-col :span="8">
+      <el-col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:8}">
         <div class="col">
           <h2 class="board-title">动态更新</h2>
           <div class="board-content">
@@ -113,7 +70,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:8}">
         <div class="col">
           <h2 class="board-title">升级计划</h2>
           <div class="board-content">
@@ -125,7 +82,7 @@
           </div>
         </div>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:8}">
         <div class="col">
           <h2 class="board-title">本月计划</h2>
           <div class="board-content center">
@@ -144,13 +101,13 @@
     </el-row>
 
     <el-row :gutter="15" class="board">
-      <el-col :span="16">
+      <el-col :xs="{span:24}" :sm="{span:24}" :md="{span:12}" :xl="{span:12}">
         <div class="col">
           <h2 class="board-title">项目进度</h2>
           <div class="board-content"></div>
         </div>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="{span:24}" :sm="{span:24}" :md="{span:12}" :xl="{span:12}">
         <div class="col">
           <h2 class="board-title">小组成员</h2>
           <div class="board-content list">
@@ -169,7 +126,7 @@
       </el-col>
     </el-row>
 
-    <b-footer />
+    <b-footer/>
   </el-container>
 </template>
 
@@ -183,7 +140,59 @@ const userInfo = ref({
   username: "欲瑶琴弦断",
   headimg: 'https://card.only99.cn/upload/user/1657504127266.png'
 })
+//快捷菜单
+const shortcutMenu = ref([
+  {
+    title: "系统用户",
+    icon: "icon-huiyuan1",
+    color: "#69c0ff",
+    type: 2
+  },
+  {
+    title: "角色管理",
+    icon: "icon-jiaoseguanli",
+    color: "#95DE64",
+    type: 2
+  },
+  {
+    title: "菜单管理",
+    icon: "icon-caidan",
+    color: "#FF9C6E",
+    type: 2
+  },
+  {
+    title: "字典管理",
+    icon: "icon-zidianguanli",
+    color: "rgb(179, 127, 235)",
+    type: 2
+  },
+  {
+    title: "配置管理",
+    icon: "icon-xitongshezhi",
+    color: "rgb(255, 214, 102)",
+    type: 2
+  },
+  {
+    title: "通知公告",
+    icon: "bell",
+    color: "rgb(92, 219, 211)",
+    type: 1
+  },
+  {
+    title: "代码生成",
+    icon: "icon-daimashengcheng",
+    color: "rgb(255, 133, 192)",
+    type: 2
+  },
+  {
+    title: "个人中心",
+    icon: "user",
+    color: "rgb(255, 192, 105)",
+    type: 1
+  }
+])
 
+//时间线自定义内容 暂为示例数据
 const activities = ref([
   {
     content: 'Event start',
@@ -204,6 +213,7 @@ const activities = ref([
   },
 ])
 
+//升级计划
 const upgradePlan = ref([
   {
     date: '2016-05-03',
@@ -227,8 +237,10 @@ const upgradePlan = ref([
   },
 ])
 
+//进度条
 const percentage = ref(10)
 
+//团队成员
 const teamMembers = ref([
   {
     avatar: 'https://card.only99.cn/upload/user/1657504127266.png',
@@ -259,12 +271,12 @@ const teamMembers = ref([
 
 
   .el-row {
-    margin-bottom: 15px;
     flex-wrap: wrap;
 
     .col {
       background-color: white;
       display: flex;
+      margin-bottom: 15px;
     }
   }
 
