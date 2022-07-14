@@ -52,6 +52,7 @@ import { api } from '@/utils/request'
 import { ElMessage } from 'element-plus'
 import store from '@/store'
 import router from '@/router'
+import { validateDataThenSubmit } from "@/utils/commen"
 
 const form = reactive({
   username: 'xianyue',
@@ -113,27 +114,17 @@ const getVerifyCode = () => {
 getVerifyCode()
 
 const sign = () => {
-  const signForm = unref(formRef)
-  if (!signForm) {
-    return
-  }
   try {
-    signForm.validate((valid) => {
-      if (valid) {
-        return api.post("/admin/sign", form)
-            .then(res => {
-              if (res.code < 0) {
-                ElMessage.error(res.message)
-                getVerifyCode()
-              }
-              if (store.state.authorization) {
-                router.push('/')
-              }
-            })
-      } else {
-        return false
-      }
-    })
+    validateDataThenSubmit(formRef, "/admin/sign", form)
+        .then(res => {
+          if (res.code < 0) {
+            ElMessage.error(res.message)
+            getVerifyCode()
+          }
+          if (store.state.authorization) {
+            router.push('/')
+          }
+        })
   } catch (e) {
     console.log(e)
   }
