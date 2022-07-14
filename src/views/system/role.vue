@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <div class="header">
       <div class="option">
-        <el-button type="primary">
+        <el-button type="primary" @click="dialogFormVisible = true">
           <el-icon class="el-icon--left">
             <CirclePlus/>
           </el-icon>
@@ -57,14 +57,28 @@
     </el-table>
     <b-pagination class="page" :pageCount="pageCount" :small="false" @getCurrentPage="getCurrentPage"
                   @getPageSize="getPageSize"></b-pagination>
+    <el-dialog v-model="dialogFormVisible" title="添加角色" width="30%">
+      <el-form :model="form" size="default" :rules="roleFormRules" ref="roleFormRef">
+        <el-form-item label="角色名" :required="true" trigger="change" prop="role">
+          <el-input type="role" v-model="form.role" autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary" @click="submitRole">提交</el-button>
+      </span>
+      </template>
+    </el-dialog>
   </el-container>
 </template>
 
 <script setup>
-import { ref, reactive, defineComponent } from 'vue'
+import { ref, reactive, defineComponent, unref } from 'vue'
 import { ElTable, ElMessage } from 'element-plus'
 import { api } from '@/utils/request'
 import bPagination from '@/components/bPagination'
+import { validateDataThenSubmit } from "@/utils/commen"
 
 const searchForm = reactive({
   role: '',
@@ -74,6 +88,7 @@ const roleList = ref([])
 const pageCount = ref()
 const currntPage = ref(1)
 const pageSize = ref(1)
+const dialogFormVisible = ref(false)
 
 const getCurrentPage = (page) => {
   console.log(page)
@@ -85,6 +100,18 @@ const getPageSize = (size) => {
   pageSize.value = size
   getRoleList(currntPage.value)
 }
+
+const form = ref({
+  role: "",
+})
+
+const roleFormRef = ref()
+
+const roleFormRules = ref({
+  role: [
+    {required: true, message: '请输入角色名', trigger: 'blur'}
+  ]
+})
 
 const getRoleList = (currntPage) => {
   const page = currntPage || 1
@@ -105,6 +132,15 @@ const getRoleList = (currntPage) => {
 }
 
 getRoleList(currntPage.value)
+
+const submitRole = () => {
+
+  validateDataThenSubmit(roleFormRef, "/admin/addRole", form)
+      .then(res => {
+        console.log(res)
+      })
+}
+
 
 defineComponent({
   components: {
