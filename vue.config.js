@@ -10,7 +10,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/admin': {
-        target: "http://bearlen-admin.test/",
+        target: "http://api.bearlen.com",
         changeOrigin: true,
         ws: true
       }
