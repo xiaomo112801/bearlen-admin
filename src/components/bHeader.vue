@@ -54,14 +54,14 @@
       </el-dropdown>
     </div>
     <el-dialog v-model="modifyPasswordDialog" title="修改密码" width="30%">
-      <el-form :model="form" :rules="rules" ref="rulesRef">
+      <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
         <el-form-item label="原密码" prop="oldPassword">
           <el-input v-model="form.oldPassword" type='password' autocomplete="off"/>
         </el-form-item>
         <el-form-item label="新密码" prop="newPassword">
           <el-input v-model="form.newPassword" type='password' autocomplete="off"/>
         </el-form-item>
-        <el-form-item label="新密码" prop="reNewPassword">
+        <el-form-item label="确认新密码" prop="reNewPassword">
           <el-input v-model="form.reNewPassword" type='password' autocomplete="off"/>
         </el-form-item>
       </el-form>
@@ -78,6 +78,7 @@
 <script>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
 import { validateDataThenSubmit } from "@/utils/commen"
+import { ref } from 'vue'
 
 export default {
   name: "bHeader",
@@ -85,26 +86,42 @@ export default {
     return {
       collapse: true,
       modifyPasswordDialog: false,
-      form: {
-        oldPassword: '',
-        newPassword: '',
-        reNewPassword: ''
-      },
-      rules: [{
-        oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
-        newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
-        reNewPassword: [
-          {required: true, message: '确认新密码'},
-          {
-            validator: (rule, value, callback) => {
-              if (value !== this.newPassword) {
-                callback(new Error('请确认密码'))
-              }
-            }, trigger: 'blur'
-          }
-        ]
-      }],
-      rulesRef: []
+    }
+  },
+  setup() {
+
+    const form = ref({
+          oldPassword: 'lxw123123',
+          newPassword: 'lxw112801',
+          reNewPassword: 'lxw112801'
+        }),
+        url = '/admin/modifyPassword'
+    const checkReNewPassword = (rule, value, callback) => {
+      if (value !== form.value.newPassword) {
+        callback(new Error('密码输入不一致'))
+      }
+    }
+    const rules = ref({
+      oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
+      newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
+      reNewPassword: [
+        {required: true, message: '确认新密码', trigger: 'blur'},
+        {validator: checkReNewPassword, trigger: 'blur'}
+      ]
+    })
+
+    const formRef = ref()
+    const confirmModifyPassword = () => {
+      validateDataThenSubmit(formRef, url, form.value)
+          .then(res => {
+            console.log(res)
+          })
+    }
+    return {
+      form,
+      rules,
+      formRef,
+      confirmModifyPassword
     }
   },
   created() {
@@ -133,15 +150,7 @@ export default {
     userCenter() {
 
     },
-    confirmModifyPassword() {
-      const rulesRef = this.rulesRef,
-          form = this.form,
-          url = '/admin/modifyPassword'
-      validateDataThenSubmit(rulesRef, url, form)
-          .then(res => {
-            console.log(res)
-          })
-    }
+
   },
   computed: {
     routerPath() {

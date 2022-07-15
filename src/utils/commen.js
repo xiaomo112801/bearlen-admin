@@ -8,20 +8,18 @@ export const validateDataThenSubmit = (refData, url, submitData) => {
   if (!unRefData) {
     return Promise.resolve(false)
   }
-  return new Promise(resolve => {
-    unRefData.validate(valid => {
-      if (valid) {
-        api.post(url, submitData).then(res => {
-          resolve(res)
-        })
-      } else {
-        return resolve(false)
-      }
-    })
+
+  return unRefData.validate(valid => {
+    if (valid) {
+      api.post(url, submitData).then(res => {
+        return Promise.resolve(res)
+      })
+    } else {
+      return Promise.resolve(false)
+    }
   })
 }
 
-//element form 表单验证(仅验证数据)
 export const validateData = (refData) => {
   const unRefData = unref(refData)
   if (!unRefData) {
