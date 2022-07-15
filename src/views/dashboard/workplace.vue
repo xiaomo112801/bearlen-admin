@@ -41,7 +41,8 @@
               class="menu-item">
         <div class="col">
           <el-icon v-if="item.type === 2" :size="32" class="el-icon iconfont" :class="item.icon"
-                   :color="item.color"></el-icon>
+                   :color="item.color">
+          </el-icon>
           <el-icon :size="32" :color="item.color" v-else>
             <aside-icon :icon="item.icon"></aside-icon>
           </el-icon>
@@ -140,6 +141,8 @@ const userInfo = ref({
   username: "欲瑶琴弦断",
   headimg: 'https://card.only99.cn/upload/user/1657504127266.png'
 })
+
+
 //快捷菜单
 const shortcutMenu = ref([
   {
@@ -268,7 +271,6 @@ const teamMembers = ref([
 .main-workplace {
   display: flex;
   flex-direction: column;
-
 
   .el-row {
     flex-wrap: wrap;
@@ -482,7 +484,6 @@ const teamMembers = ref([
       font-size: 14px;
     }
   }
-
 
 }
 

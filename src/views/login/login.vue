@@ -47,7 +47,7 @@
 
 <script setup>
 
-import { reactive, ref, unref } from 'vue'
+import { reactive, ref } from 'vue'
 import { api } from '@/utils/request'
 import { ElMessage } from 'element-plus'
 import store from '@/store'
@@ -56,7 +56,7 @@ import { validateDataThenSubmit } from "@/utils/commen"
 
 const form = reactive({
   username: 'xianyue',
-  password: '11111111',
+  password: 'lxw123123',
   verficationCode: '1231'
 })
 
@@ -118,13 +118,14 @@ const sign = () => {
     validateDataThenSubmit(formRef, "/admin/sign", form)
         .then(res => {
           if (res.code < 0) {
-            ElMessage.error(res.message)
+            ElMessage.error({appendTo: document.body, message: res.message})
             getVerifyCode()
           }
           if (store.state.authorization) {
             router.push('/')
           }
         })
+
   } catch (e) {
     console.log(e)
   }

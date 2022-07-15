@@ -24,7 +24,6 @@
       </div>
       <div class="user-name">
         <span class="name">弦月</span>
-
       </div>
       <el-dropdown class="more" @command="handleCommand">
         <el-icon el-dropdown-link>
@@ -54,19 +53,58 @@
         </template>
       </el-dropdown>
     </div>
+    <el-dialog v-model="modifyPasswordDialog" title="修改密码" width="30%">
+      <el-form :model="form" :rules="rules" ref="rulesRef">
+        <el-form-item label="原密码" prop="oldPassword">
+          <el-input v-model="form.oldPassword" type='password' autocomplete="off"/>
+        </el-form-item>
+        <el-form-item label="新密码" prop="newPassword">
+          <el-input v-model="form.newPassword" type='password' autocomplete="off"/>
+        </el-form-item>
+        <el-form-item label="新密码" prop="reNewPassword">
+          <el-input v-model="form.reNewPassword" type='password' autocomplete="off"/>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="modifyPasswordDialog = false">取消</el-button>
+        <el-button type="primary" @click="confirmModifyPassword">确认修改</el-button>
+      </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
-// import bBreadrumb from '@/components/bBreadrumb'
-
+import { validateDataThenSubmit } from "@/utils/commen"
 
 export default {
   name: "bHeader",
   data() {
     return {
-      collapse: true
+      collapse: true,
+      modifyPasswordDialog: false,
+      form: {
+        oldPassword: '',
+        newPassword: '',
+        reNewPassword: ''
+      },
+      rules: [{
+        oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
+        newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
+        reNewPassword: [
+          {required: true, message: '确认新密码'},
+          {
+            validator: (rule, value, callback) => {
+              if (value !== this.newPassword) {
+                callback(new Error('请确认密码'))
+              }
+            }, trigger: 'blur'
+          }
+        ]
+      }],
+      rulesRef: []
     }
   },
   created() {
@@ -83,7 +121,7 @@ export default {
       }
     },
     editPassword() {
-
+      this.modifyPasswordDialog = true
     },
     loginOut() {
       return this.$api.post('/admin/loginOut')
@@ -94,6 +132,15 @@ export default {
     },
     userCenter() {
 
+    },
+    confirmModifyPassword() {
+      const rulesRef = this.rulesRef,
+          form = this.form,
+          url = '/admin/modifyPassword'
+      validateDataThenSubmit(rulesRef, url, form)
+          .then(res => {
+            console.log(res)
+          })
     }
   },
   computed: {

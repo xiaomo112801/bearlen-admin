@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineComponent, unref } from 'vue'
+import { ref, reactive, defineComponent } from 'vue'
 import { ElTable, ElMessage } from 'element-plus'
 import { api } from '@/utils/request'
 import bPagination from '@/components/bPagination'
@@ -122,7 +122,7 @@ const getRoleList = (currntPage) => {
   }
   return api.get('/admin/getRoleList', searchMap)
       .then(res => {
-        roleList.value = (res.length > 0) ? res.roleList : []
+        roleList.value = (res.length > 0) ? res : []
         pageCount.value = res.pageCount || 1
       })
       .catch(error => {
@@ -134,10 +134,14 @@ const getRoleList = (currntPage) => {
 getRoleList(currntPage.value)
 
 const submitRole = () => {
-
-  validateDataThenSubmit(roleFormRef, "/admin/addRole", form)
+  validateDataThenSubmit(roleFormRef, "/admin/addRole", form.value)
       .then(res => {
-        console.log(res)
+        if (res.code > 0) {
+          ElMessage.success(res.message)
+          getRoleList()
+        } else {
+          ElMessage.error(res.message)
+        }
       })
 }
 
