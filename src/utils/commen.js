@@ -8,14 +8,10 @@ export const validateDataThenSubmit = (refData, url, submitData) => {
   if (!unRefData) {
     return Promise.resolve(false)
   }
-
-  return unRefData.validate(valid => {
-    if (valid) {
-      api.post(url, submitData).then(res => {
-        return Promise.resolve(res)
-      })
-    } else {
-      return Promise.resolve(false)
+  const validRes = unRefData.validate()
+  return validRes.then(res => {
+    if (res) {
+      return api.post(url, submitData)
     }
   })
 }
@@ -25,7 +21,5 @@ export const validateData = (refData) => {
   if (!unRefData) {
     return false
   }
-  return unRefData.validate(valid => {
-    return valid
-  })
+  return unRefData.validate()
 }

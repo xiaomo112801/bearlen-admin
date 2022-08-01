@@ -75,100 +75,76 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
 import { validateDataThenSubmit } from "@/utils/commen"
-import { ref } from 'vue'
+import { ref, defineEmits, computed } from 'vue'
+import { api } from "@/utils/request"
+import { useStore } from 'vuex'
+import router from '@/router/index'
 
-export default {
-  name: "bHeader",
-  data() {
-    return {
-      collapse: true,
-      modifyPasswordDialog: false,
-    }
-  },
-  setup() {
+const collapse = ref(true),
+    modifyPasswordDialog = ref(false),
+    store = useStore()
 
-    const form = ref({
-          oldPassword: 'lxw123123',
-          newPassword: 'lxw112801',
-          reNewPassword: 'lxw112801'
-        }),
-        url = '/admin/modifyPassword'
-    const checkReNewPassword = (rule, value, callback) => {
-      if (value !== form.value.newPassword) {
-        callback(new Error('密码输入不一致'))
-      }
-    }
-    const rules = ref({
-      oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
-      newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
-      reNewPassword: [
-        {required: true, message: '确认新密码', trigger: 'blur'},
-        {validator: checkReNewPassword, trigger: 'blur'}
-      ]
-    })
-
-    const formRef = ref()
-    const confirmModifyPassword = () => {
-      validateDataThenSubmit(formRef, url, form.value)
-          .then(res => {
-            console.log(res)
-          })
-    }
-    return {
-      form,
-      rules,
-      formRef,
-      confirmModifyPassword
-    }
-  },
-  created() {
-
-  },
-  methods: {
-    setCollapse() {
-      this.collapse = !this.collapse
-      this.$emit("getCollapse", !this.collapse)
-    },
-    handleCommand(command) {
-      if (typeof this[command] === 'function') {
-        this[command]()
-      }
-    },
-    editPassword() {
-      this.modifyPasswordDialog = true
-    },
-    loginOut() {
-      return this.$api.post('/admin/loginOut')
-          .then(() => {
-            localStorage.clear()
-            this.$store.commit("changeToken", '')
-            this.$router.push('/login')
-          })
-    },
-    userCenter() {
-
-    },
-
-  },
-  computed: {
-    routerPath() {
-      return this.$router
-    }
-  },
-  components: {
-    ArrowDownBold,
-    Bell,
-    Fold,
-    Refresh,
-    Expand,
-    SwitchButton,
-    User,
-    Key
+const form = ref({
+      oldPassword: 'lxw123123',
+      newPassword: 'lxw112801',
+      reNewPassword: 'lxw112801'
+    }),
+    url = '/admin/modifyPassword'
+const checkReNewPassword = (rule, value, callback) => {
+  if (value !== form.value.newPassword) {
+    callback(new Error('密码输入不一致'))
   }
 }
+const rules = ref({
+  oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
+  newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
+  reNewPassword: [
+    {required: true, message: '确认新密码', trigger: 'blur'},
+    {validator: checkReNewPassword, trigger: 'blur'}
+  ]
+})
+
+const formRef = ref()
+const confirmModifyPassword = () => {
+  validateDataThenSubmit(formRef, url, form.value)
+      .then(res => {
+        console.log(res)
+      })
+}
+
+
+const editPassword = () => {
+  modifyPasswordDialog.value = true
+}
+
+const emits = defineEmits(['getCollapse'])
+const setCollapse = () => {
+  collapse.value = !collapse.value
+  emits("getCollapse", !collapse.value)
+}
+
+const handleCommand = command => {
+  const func = eval(command)
+  if (typeof func === 'function') {
+    func()
+  }
+}
+
+const loginOut = () => {
+  return api.post('/admin/loginOut')
+      .then(() => {
+        localStorage.clear()
+        store.commit("changeToken", '')
+        router.push('/login')
+      })
+}
+const routerPath = computed(() => {
+  return router
+})
+
 </script>
 <style lang="scss" scoped>
 
