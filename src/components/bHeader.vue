@@ -143,6 +143,7 @@ export default {
     loginOut() {
       return this.$api.post('/admin/loginOut')
           .then(() => {
+            localStorage.clear()
             this.$store.commit("changeToken", '')
             this.$router.push('/login')
           })

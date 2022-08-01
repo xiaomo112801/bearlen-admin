@@ -64,6 +64,7 @@ router.beforeEach((to, from, next) => {
     if (store.state.authorization) {
       next()
     } else {
+      localStorage.clear()
       next({
         path: "/login",
         query: {redirect: to.fullPath}
