@@ -5,13 +5,13 @@
     </el-aside>
     <el-container>
       <el-header>
-        <b-header @getCollapse="getCollapse"></b-header>
+        <b-header @getCollapse="getCollapse" @refresh="refresh"></b-header>
       </el-header>
       <div class="nav-tab">
         <b-nav-tab :navItem="navItem"></b-nav-tab>
       </div>
       <el-main class="main">
-        <router-view></router-view>
+        <router-view v-if="isPageRefresh"></router-view>
       </el-main>
 
     </el-container>
@@ -28,7 +28,13 @@ export default {
   data() {
     return {
       isCollapse: false,
-      navItem: {}
+      navItem: {},
+      isPageRefresh: true
+    }
+  },
+  provide() {
+    return {
+      refresh: this.refresh
     }
   },
   methods: {
@@ -37,8 +43,15 @@ export default {
     },
     getAsideItem(navItem) {
       this.navItem = navItem
+    },
+    refresh() {
+      this.isPageRefresh = false
+      this.$nextTick(function () {
+        this.isPageRefresh = true
+      })
     }
   },
+
   components: {
     bHeader,
     bAside,

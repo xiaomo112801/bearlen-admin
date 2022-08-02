@@ -8,7 +8,7 @@
         </el-icon>
       </div>
       <div class="refresh">
-        <el-icon :size="20">
+        <el-icon :size="20" @click="refreshPage" :class="{'refresh-icon':animate}">
           <refresh/>
         </el-icon>
       </div>
@@ -37,7 +37,7 @@
               </el-icon>
               个人中心
             </el-dropdown-item>
-            <el-dropdown-item command="editPassword">
+            <el-dropdown-item command="modifyPassword">
               <el-icon :size="16">
                 <key/>
               </el-icon>
@@ -78,7 +78,7 @@
 <script setup>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
 import { validateDataThenSubmit } from "@/utils/commen"
-import { ref, defineEmits, computed } from 'vue'
+import { ref, defineEmits } from 'vue'
 import { api } from "@/utils/request"
 import { useStore } from 'vuex'
 import router from '@/router/index'
@@ -116,34 +116,43 @@ const confirmModifyPassword = () => {
 }
 
 
-const editPassword = () => {
-  modifyPasswordDialog.value = true
-}
-
-const emits = defineEmits(['getCollapse'])
+const emits = defineEmits(['getCollapse', 'refresh'])
 const setCollapse = () => {
   collapse.value = !collapse.value
   emits("getCollapse", !collapse.value)
 }
 
+
+const optionsList = {
+  modifyPassword() {
+    modifyPasswordDialog.value = true
+  },
+  loginOut() {
+    return api.post('/admin/loginOut')
+        .then(() => {
+          localStorage.clear()
+          store.commit("changeToken", '')
+          router.push('/login')
+        })
+  }
+}
+
 const handleCommand = command => {
-  const func = eval(command)
+  const func = optionsList[command]
   if (typeof func === 'function') {
     func()
   }
 }
 
-const loginOut = () => {
-  return api.post('/admin/loginOut')
-      .then(() => {
-        localStorage.clear()
-        store.commit("changeToken", '')
-        router.push('/login')
-      })
+const animate = ref(false)
+const refreshPage = () => {
+  animate.value = true
+  emits("refresh")
+  setTimeout(function () {
+    animate.value = false
+  }, 2500)
 }
-const routerPath = computed(() => {
-  return router
-})
+
 
 </script>
 <style lang="scss" scoped>
@@ -193,6 +202,15 @@ const routerPath = computed(() => {
         }
       }
 
+    }
+
+    .refresh-icon {
+      @keyframes rotating {
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+      animation: rotating 2.5s;
     }
   }
 

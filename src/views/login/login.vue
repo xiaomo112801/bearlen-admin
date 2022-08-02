@@ -35,7 +35,6 @@
               <img :src="captcha" @click="getVerifyCode"/>
             </div>
           </el-form-item>
-
           <el-form-item label="" class="btn">
             <el-button type="primary" @click="sign" @keyup.enter="sign" :auto-insert-space="true">登录</el-button>
           </el-form-item>
@@ -125,7 +124,6 @@ const sign = () => {
             router.push('/')
           }
         })
-
   } catch (e) {
     console.log(e)
   }

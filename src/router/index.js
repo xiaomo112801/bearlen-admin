@@ -23,25 +23,38 @@ const routes = [
         component: workplace,
       },
       {
-        path: "/dashboard/workplace",
-        name: "workplace",
-        component: workplace
-      }, {
-        path: "/dashboard/analysis",
-        name: "analysis",
-        component: analysis
-      }, {
-        path: "/dashboard/monitor",
-        name: "monitor",
-        component: monitor
-      }, {
+        path: "/dashboard",
+        name: "dashboard",
+        children: [
+          {
+            path: "workplace",
+            name: "workplace",
+            component: workplace
+          }, {
+            path: "analysis",
+            name: "analysis",
+            component: analysis
+          }, {
+            path: "monitor",
+            name: "monitor",
+            component: monitor
+          }
+        ]
+      },
+      {
         path: "/index",
         name: "index",
         component: index
-      }, {
-        path: "/system/role",
-        name: "role",
-        component: role
+      },
+      {
+        path: "/system",
+        children: [
+          {
+            path: "role",
+            name: "role",
+            component: role
+          }
+        ]
       }
     ]
   },

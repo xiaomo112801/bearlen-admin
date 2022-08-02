@@ -74,7 +74,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineComponent } from 'vue'
+import { ref, reactive, defineComponent, inject } from 'vue'
 import { ElTable, ElMessage } from 'element-plus'
 import { api } from '@/utils/request'
 import bPagination from '@/components/bPagination'
@@ -83,6 +83,8 @@ import { validateDataThenSubmit } from "@/utils/commen"
 const searchForm = reactive({
   role: '',
 })
+
+inject('refresh')
 
 const roleList = ref([])
 const pageCount = ref()

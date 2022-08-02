@@ -37,7 +37,7 @@
     </el-row>
 
     <el-row :gutter="15" justify="center" align="middle" class="shortcut-menu" type="flex">
-      <el-col :xs="{span:12}" :sm="{span:6}" :md="{span:3}" :xl="{span:3}" v-for="item in shortcutMenu" :key="item"
+      <el-col :xs="{span:24}" :sm="{span:12}" :md="{span:6}" :xl="{span:3}" v-for="item in shortcutMenu" :key="item"
               class="menu-item">
         <div class="col">
           <el-icon v-if="item.type === 2" :size="32" class="el-icon iconfont" :class="item.icon"
