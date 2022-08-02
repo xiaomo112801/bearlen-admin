@@ -8,7 +8,7 @@
         </div>
         <div class="greeting">
           <h1>下午好，{{ userInfo.nickname }}。欢迎回来！</h1>
-          <span>一昨日はウサギ、昨日は鹿、今日はあなた</span>
+          <span>{{ userInfo.signature }}</span>
         </div>
       </div>
       <div class="workInfo">
