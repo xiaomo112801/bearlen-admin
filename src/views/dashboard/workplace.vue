@@ -4,10 +4,10 @@
     <el-row class="hello main-item">
       <div class="userInfo">
         <div class="head-img">
-          <el-image fit="cover" :src="userInfo.headimg" alt="欲瑶琴弦断"/>
+          <el-image fit="cover" :src="userInfo.avatar" alt="欲瑶琴弦断"/>
         </div>
         <div class="greeting">
-          <h1>下午好，{{ userInfo.username }}。欢迎回来！</h1>
+          <h1>下午好，{{ userInfo.nickname }}。欢迎回来！</h1>
           <span>一昨日はウサギ、昨日は鹿、今日はあなた</span>
         </div>
       </div>
@@ -133,14 +133,13 @@
 
 <script setup>
 
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useStore } from 'vuex'
 import bFooter from '@/components/bFooter'
 import asideIcon from "@/components/asideIcon"
 
-const userInfo = ref({
-  username: "欲瑶琴弦断",
-  headimg: 'https://card.only99.cn/upload/user/1657504127266.png'
-})
+const store = useStore()
+const userInfo = computed(() => store.state.user.userInfo)
 
 
 //快捷菜单

@@ -122,6 +122,7 @@ const sign = () => {
           }
           if (store.state.authorization) {
             router.push('/')
+            store.dispatch('getUserInfo')
           }
         })
   } catch (e) {

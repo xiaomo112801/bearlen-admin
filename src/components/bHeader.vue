@@ -14,16 +14,16 @@
       </div>
     </div>
     <div class="msg-alert">
-      <el-icon :size="20">
+      <el-icon :size="20" v-click-outside="onClickOutside">
         <bell/>
       </el-icon>
     </div>
     <div class="user">
       <div class="head-img">
-        <img src="http://qiniu.bearlen.com/BEARLEN-03.png" alt="头像"/>
+        <el-avatar :src="userInfo.avatar" alt="头像"/>
       </div>
       <div class="user-name">
-        <span class="name">弦月</span>
+        <span class="name">{{ userInfo.username }}</span>
       </div>
       <el-dropdown class="more" @command="handleCommand">
         <el-icon el-dropdown-link>
@@ -53,6 +53,15 @@
         </template>
       </el-dropdown>
     </div>
+    <el-popover
+        ref="popoverRef"
+        :virtual-ref="buttonRef"
+        trigger="click"
+        title="With title"
+        virtual-triggering
+    >
+      <span> Some content </span>
+    </el-popover>
     <el-dialog v-model="modifyPasswordDialog" title="修改密码" width="30%">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
         <el-form-item label="原密码" prop="oldPassword">
@@ -78,15 +87,16 @@
 <script setup>
 import { ArrowDownBold, Bell, Fold, Refresh, Expand, SwitchButton, User, Key } from "@element-plus/icons-vue"
 import { validateDataThenSubmit } from "@/utils/commen"
-import { ref, defineEmits } from 'vue'
+import { ref, unref, defineEmits, computed } from 'vue'
 import { api } from "@/utils/request"
 import { useStore } from 'vuex'
 import router from '@/router/index'
+import { ClickOutside as vClickOutside } from "element-plus"
 
 const collapse = ref(true),
     modifyPasswordDialog = ref(false),
-    store = useStore()
-
+    store = useStore(),
+    userInfo = computed(() => store.state.user.userInfo)
 const form = ref({
       oldPassword: 'lxw123123',
       newPassword: 'lxw112801',
@@ -98,6 +108,8 @@ const checkReNewPassword = (rule, value, callback) => {
     callback(new Error('密码输入不一致'))
   }
 }
+
+
 const rules = ref({
   oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
   newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
@@ -115,6 +127,11 @@ const confirmModifyPassword = () => {
       })
 }
 
+const buttonRef = ref()
+const popoverRef = ref()
+const onClickOutside = () => {
+  unref(popoverRef).popperRef?.delayHide?.()
+}
 
 const emits = defineEmits(['getCollapse', 'refresh'])
 const setCollapse = () => {
@@ -237,18 +254,18 @@ const refreshPage = () => {
     }
 
     .head-img {
-      height: 30px;
-      width: 30px;
+      //height: 30px;
+      //width: 30px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
+      //img {
+      //  object-fit: cover;
+      //  width: 100%;
+      //  height: 100%;
+      //}
     }
 
     .user-name {
