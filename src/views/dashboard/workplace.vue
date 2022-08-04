@@ -429,6 +429,7 @@ const teamMembers = ref([
       font-size: 14px;
       justify-content: flex-start;
       align-items: flex-start;
+      overflow: hidden;
 
       p {
         box-sizing: border-box;
@@ -441,6 +442,7 @@ const teamMembers = ref([
 
         span {
           margin-right: 15px;
+          white-space: nowrap;
         }
 
         @mixin tag($color) {
@@ -465,12 +467,18 @@ const teamMembers = ref([
           flex-direction: column;
 
           .post {
-            color: #b1b3b8
+            color: #b1b3b8;
+            white-space: nowrap;
+          }
+
+          .username {
+            white-space: nowrap;
           }
 
           span {
             padding: 3px 0;
             font-size: 14px;
+            overflow: hidden;
           }
         }
       }

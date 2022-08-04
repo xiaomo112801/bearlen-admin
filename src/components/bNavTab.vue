@@ -5,29 +5,35 @@
         <arrow-left/>
       </el-icon>
     </div>
-    <el-row align="middle" justify="start">
-      <el-tabs
-          v-model="editableTabsValue"
-          type="card"
-          class="nav-tabs"
-          @tab-remove="removeTab"
-          @tab-click="pageNav"
-      >
-        <el-tab-pane
-            key="1"
-            label="主页"
-            name="1"
-            :closable="false"
-        ></el-tab-pane>
-        <el-tab-pane
-            v-for="item in navList"
-            :key="item.name"
-            :label="item.title"
-            :name="item.name"
-            :closable="true"
-        ></el-tab-pane>
-      </el-tabs>
-    </el-row>
+    <el-scrollbar class="menu-list">
+      <el-row align="middle" justify="start">
+
+        <el-tabs
+            v-model="editableTabsValue"
+            type="card"
+            class="nav-tabs"
+            @tab-remove="removeTab"
+            @tab-click="pageNav"
+        >
+          <el-tab-pane
+              key="1"
+              label="主页"
+              name="1"
+              :closable="false"
+          ></el-tab-pane>
+
+          <el-tab-pane
+              v-for="item in navList"
+              :key="item.name"
+              :label="item.title"
+              :name="item.name"
+              :closable="true"
+          ></el-tab-pane>
+
+        </el-tabs>
+
+      </el-row>
+    </el-scrollbar>
     <div class="right-btn">
       <el-icon :size="20">
         <arrow-right/>
@@ -36,40 +42,38 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "bNavTab",
-  computed: {
-    navList() {
-      return this.$store.state.menu.navMenu
-    },
-    editableTabsValue: {
-      get() {
-        return this.$store.state.menu.activeNav
-      },
-      set() {
-        return this.$store.state.menu.activeNav
-      }
-    }
+<script setup>
+import { useStore } from "vuex"
+import { computed } from "vue"
+import router from '@/router/index'
+
+const store = useStore()
+
+const navList = computed(() => store.state.menu.navMenu)
+const editableTabsValue = computed({
+  get() {
+    return store.state.menu.activeNav
   },
-  methods: {
-    removeTab(targetName) {
-      this.$store.commit('closeNavMenu', targetName)
+  set() {
+    return store.state.menu.activeNav
+  }
+})
+
+const removeTab = (targetName) => {
+      store.commit('closeNavMenu', targetName)
     },
-    pageNav(pane) {
+    pageNav = (pane) => {
       const name = pane.props.name
       if (name === '1') {
-        this.$router.push('/dashboard/workplace')
+        router.push('/dashboard/workplace')
       } else {
-        const navItme = this.navList.filter(item => {
+        const navItme = navList.value.filter(item => {
           return item.name === name
         })
-        this.$router.push(navItme[0].url)
+        router.push(navItme[0].url)
       }
-      this.$store.commit('changeActiveNav', name)
+      store.commit('changeActiveNav', name)
     }
-  }
-}
 </script>
 
 <style lang="scss" scoped>
@@ -90,6 +94,11 @@ export default {
   }
 }
 
+.menu-list {
+  flex: 1;
+  z-index: 999
+}
+
 :deep .el-tabs--card {
   & > .el-tabs__header {
     border: none;
@@ -103,6 +112,10 @@ export default {
   .el-tabs__item {
     border-left: none
   }
+}
+
+:deep .el-scrollbar__bar {
+  z-index: 9999;
 }
 
 
