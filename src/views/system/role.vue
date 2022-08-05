@@ -2,7 +2,7 @@
   <el-container class="main-container">
     <div class="header">
       <div class="option">
-        <el-button type="primary" @click="dialogFormVisible = true">
+        <el-button type="primary" @click="dialogFormVisible.value = true">
           <el-icon class="el-icon--left">
             <CirclePlus/>
           </el-icon>
@@ -46,7 +46,7 @@
             </el-icon>
             编辑
           </el-button>
-          <el-button text type="primary">
+          <el-button :link="true" type="primary">
             <el-icon class="el-icon--left">
               <delete/>
             </el-icon>
@@ -65,7 +65,7 @@
       </el-form>
       <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button @click="dialogFormVisible.value = false">取消</el-button>
         <el-button type="primary" @click="submitRole">提交</el-button>
       </span>
       </template>

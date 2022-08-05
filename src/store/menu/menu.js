@@ -1,13 +1,21 @@
+import { ElMessage } from "element-plus"
+import { api } from "@/utils/request"
+
 export default {
   state: () => {
     return {
       navMenu: localStorage.getItem('navMenu') ? JSON.parse(localStorage.getItem('navMenu')) : [],
       activeNav: localStorage.getItem('activeNav') ? localStorage.getItem('activeNav') : '1',
       defaultActive: localStorage.getItem('defaultActive') ? localStorage.getItem('defaultActive') : '/dashboard/workplace',
-      defaultOpened: localStorage.getItem('defaultOpened') ? localStorage.getItem('defaultOpened') : '1'
+      defaultOpened: localStorage.getItem('defaultOpened') ? localStorage.getItem('defaultOpened') : '1',
+      menuList: localStorage.getItem('menuList') ? JSON.parse(localStorage.getItem('menuList')) : [],
     }
   },
   mutations: {
+    setMenuList(state, menuList) {
+      state.menuList = menuList
+      localStorage.setItem('menuList', JSON.stringify(menuList))
+    },
     addNavMenu(state, navItem) {
       if (this.getters.navItemCount(navItem) === 0) {
         state.navMenu.push(navItem)
@@ -36,6 +44,22 @@ export default {
         return item.url === navItem.url
       })
       return navItemArr.length
+    },
+    // menuList(state) {
+    //   return state.menuList ? state.menuList : JSON.parse(localStorage.getItem('menuList'))
+    // }
+  },
+  actions: {
+    getMenuList(context) {
+      api.get("/admin/getMenuList")
+        .then(res => {
+          context.commit('setMenuList', res.data)
+        })
+        .catch(error => {
+          // if (error.response.status === 500) {
+          //   context.commit('setMenuList')
+          // }
+        })
     }
   }
 }

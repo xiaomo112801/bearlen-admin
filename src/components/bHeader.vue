@@ -63,7 +63,7 @@
       <span> Some content </span>
     </el-popover>
     <el-dialog v-model="modifyPasswordDialog" title="修改密码" width="30%">
-      <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
+      <el-form :model="form" :rules="rules" ref="modifyPasswordformRef" label-width="100px">
         <el-form-item label="原密码" prop="oldPassword">
           <el-input v-model="form.oldPassword" type='password' autocomplete="off"/>
         </el-form-item>
@@ -91,7 +91,7 @@ import { ref, unref, defineEmits, computed } from 'vue'
 import { api } from "@/utils/request"
 import { useStore } from 'vuex'
 import router from '@/router/index'
-import { ClickOutside as vClickOutside } from "element-plus"
+import { ClickOutside as vClickOutside, ElMessage } from "element-plus"
 
 const collapse = ref(true),
     modifyPasswordDialog = ref(false),
@@ -104,9 +104,13 @@ const form = ref({
     }),
     url = '/admin/modifyPassword'
 const checkReNewPassword = (rule, value, callback) => {
+  if (!value) {
+    callback(new Error('请再次输入密码'))
+  }
   if (value !== form.value.newPassword) {
     callback(new Error('密码输入不一致'))
   }
+  callback()
 }
 
 
@@ -114,16 +118,21 @@ const rules = ref({
   oldPassword: [{required: true, message: '请输入原密码', trigger: 'blur'}],
   newPassword: [{required: true, message: '请输入新密码', trigger: 'blur'}],
   reNewPassword: [
-    {required: true, message: '确认新密码', trigger: 'blur'},
+    // {required: true, message: '确认新密码', trigger: 'blur'},
     {validator: checkReNewPassword, trigger: 'blur'}
   ]
 })
 
-const formRef = ref()
+const modifyPasswordformRef = ref()
 const confirmModifyPassword = () => {
-  validateDataThenSubmit(formRef, url, form.value)
+  validateDataThenSubmit(modifyPasswordformRef, url, form.value)
       .then(res => {
-        console.log(res)
+        if (res.code === 1) {
+          ElMessage.success(res.message)
+          modifyPasswordDialog.value = false
+        } else {
+          ElMessage.error(res.message)
+        }
       })
 }
 
@@ -181,7 +190,6 @@ const refreshPage = () => {
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  //height: 100%;
   border-bottom: 1px solid #e3e3e3;
   background-color: white;
   box-sizing: border-box;

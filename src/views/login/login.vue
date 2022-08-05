@@ -25,7 +25,7 @@
             </el-input>
           </el-form-item>
           <el-form-item label="" class="" prop="verficationCode">
-            <el-input class="verify" v-model="form.verficationCode" placeholder="请输入验证码">
+            <el-input class="verify" v-model="form.verficationCode" placeholder="验证码">
               <template #prefix>
                 <el-icon class="el-input__icon iconfont icon-yanzhengma">
                 </el-icon>
@@ -54,9 +54,9 @@ import router from '@/router'
 import { validateDataThenSubmit } from "@/utils/commen"
 
 const form = reactive({
-  username: 'xianyue',
-  password: 'lxw123123',
-  verficationCode: '1231'
+  username: '弦月',
+  password: 'lxw112801',
+  verficationCode: ''
 })
 
 const captcha = ref("")
@@ -123,6 +123,7 @@ const sign = () => {
           if (store.state.authorization) {
             router.push('/')
             store.dispatch('getUserInfo')
+            store.dispatch('getMenuList')
           }
         })
   } catch (e) {

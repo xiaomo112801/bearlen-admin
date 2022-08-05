@@ -37,63 +37,29 @@
     </div>
   </div>
 </template>
-
-<script>
+<script setup>
 import asideIcon from "@/components/asideIcon"
-import { ElMessage } from "element-plus"
+import { useStore } from 'vuex'
+import { defineProps, computed } from "vue"
 
-export default {
-  name: "bAside",
-  props: {
-    isCollapse: Boolean
-  },
-  computed: {
-    defaultActive() {
-      return this.$store.state.menu.defaultActive
-    }
-  },
-  data() {
-    return {
-      menuList: [
-        {
-          title: "", type: 1, index: "1", icon: "", childMenu: [
-            {title: "", type: 1, index: "", icon: "", url: ""}
-          ]
-        }
-      ]
-    }
-  },
-  created() {
-    this.getMenuList()
-  },
-  watch: {},
-  methods: {
-    getMenuList() {
-      this.$api.get("/admin/getMenuList")
-          .then(res => {
-            this.menuList = res.data
-          })
-          .catch(error => {
-            if (error.response.status === 500) {
-              ElMessage.error('当前登录已失效')
-              this.$store.commit('changeToken', '')
-              this.$router.push('/login')
-            }
-          })
-    },
-    setNavItem(menuItem) {
-      this.$store.commit('addNavMenu', menuItem)
-      this.$store.commit('changeActiveNav', menuItem.name)
-    },
-    handleSelect(index) {
-      this.$store.commit('changeDefaultActive', index)
-    }
-  },
-  components: {
-    asideIcon
-  }
+
+defineProps({
+  isCollapse: Boolean
+})
+const store = useStore()
+
+const defaultActive = computed(() => store.state.menu.defaultActive)
+
+const menuList = computed(() => store.state.menu.menuList)
+
+const setNavItem = menuItem => {
+  store.commit('addNavMenu', menuItem)
+  store.commit('changeActiveNav', menuItem.name)
 }
 
+const handleSelect = index => {
+  store.commit('changeDefaultActive', index)
+}
 
 </script>
 
