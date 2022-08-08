@@ -23,3 +23,17 @@ export const validateData = (refData) => {
   }
   return unRefData.validate()
 }
+
+export const injectionRouter = (menuList, router) => {
+  menuList.map(item => {
+    if (item.pid === 0) {
+      router.addRoute('/', {path: `/${item.module}`, name: item.module})
+    } else {
+      router.addRoute(item.module, {path: item.url, name: item.component, component: import(`@/views${item.url}`)})
+    }
+    if (item.childMenu.length > 0) {
+      injectionRouter(item.childMenu, router)
+    }
+  })
+  return true
+}

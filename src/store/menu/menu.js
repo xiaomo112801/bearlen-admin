@@ -1,5 +1,6 @@
-import { ElMessage } from "element-plus"
 import { api } from "@/utils/request"
+import router from '@/router'
+import { injectionRouter } from "@/utils/commen"
 
 export default {
   state: () => {
@@ -45,20 +46,18 @@ export default {
       })
       return navItemArr.length
     },
-    // menuList(state) {
-    //   return state.menuList ? state.menuList : JSON.parse(localStorage.getItem('menuList'))
-    // }
   },
   actions: {
     getMenuList(context) {
       api.get("/admin/getMenuList")
         .then(res => {
-          context.commit('setMenuList', res.data)
+          const menuList = res.data
+          context.commit('setMenuList', menuList)
+          injectionRouter(menuList, router)
+
         })
         .catch(error => {
-          // if (error.response.status === 500) {
-          //   context.commit('setMenuList')
-          // }
+          console.error(error)
         })
     }
   }

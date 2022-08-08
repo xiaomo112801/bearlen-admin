@@ -3,10 +3,8 @@ import store from "@/store/index"
 import base from "@/views/base"
 import login from "@/views/login/login"
 import workplace from "@/views/dashboard/workplace"
-import analysis from "@/views/dashboard/analysis"
-import monitor from "@/views/dashboard/monitor"
-import index from "@/views/index/index"
-import role from "@/views/system/role"
+import error404 from "@/views/error/404"
+
 
 const routes = [
   {
@@ -19,42 +17,13 @@ const routes = [
     children: [
       {
         path: "/",
-        name: "/",
+        name: "base",
         component: workplace,
       },
       {
-        path: "/dashboard",
-        name: "dashboard",
-        children: [
-          {
-            path: "workplace",
-            name: "workplace",
-            component: workplace
-          }, {
-            path: "analysis",
-            name: "analysis",
-            component: analysis
-          }, {
-            path: "monitor",
-            name: "monitor",
-            component: monitor
-          }
-        ]
-      },
-      {
-        path: "/index",
-        name: "index",
-        component: index
-      },
-      {
-        path: "/system",
-        children: [
-          {
-            path: "role",
-            name: "role",
-            component: role
-          }
-        ]
+        path: '/404',
+        name: "404",
+        component: error404
       }
     ]
   },
@@ -62,8 +31,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: login
-  }
-
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: "/404",
+    hidden: true
+  },
 ]
 
 
@@ -84,6 +57,7 @@ router.beforeEach((to, from, next) => {
       })
     }
   } else {
+    console.log(next())
     next()
   }
 })
