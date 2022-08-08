@@ -1,6 +1,6 @@
 import { api } from "@/utils/request"
 import router from '@/router'
-import { injectionRouter } from "@/utils/commen"
+
 
 export default {
   state: () => {
@@ -53,8 +53,6 @@ export default {
         .then(res => {
           const menuList = res.data
           context.commit('setMenuList', menuList)
-          injectionRouter(menuList, router)
-
         })
         .catch(error => {
           console.error(error)

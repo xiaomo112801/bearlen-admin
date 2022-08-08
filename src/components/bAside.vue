@@ -47,7 +47,7 @@ defineProps({
   isCollapse: Boolean
 })
 const store = useStore()
-
+store.dispatch('getMenuList')
 const defaultActive = computed(() => store.state.menu.defaultActive)
 
 const menuList = computed(() => store.state.menu.menuList)

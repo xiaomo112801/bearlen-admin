@@ -1,5 +1,6 @@
 import { unref } from 'vue'
 import { api } from '@/utils/request'
+import routerMap from "@/router/routerMap"
 // import { ElMessage } from "element-plus"
 
 //element form表单验证后提交数据
@@ -29,11 +30,12 @@ export const injectionRouter = (menuList, router) => {
     if (item.pid === 0) {
       router.addRoute('/', {path: `/${item.module}`, name: item.module})
     } else {
-      router.addRoute(item.module, {path: item.url, name: item.component, component: import(`@/views${item.url}`)})
+      router.addRoute(item.module, {path: item.component, name: item.component, component: routerMap[item.component]})
     }
     if (item.childMenu.length > 0) {
       injectionRouter(item.childMenu, router)
     }
   })
+  console.log()
   return true
 }
