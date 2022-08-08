@@ -42,7 +42,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const menuList = store.state.menu.menuList
   injectionRouter(menuList, router)
-  debugger
+  console.log(router.getRoutes())
   if (!router.hasRoute(to.name) && to.name !=='404') {
     next({
       path: "/404"

@@ -26,16 +26,19 @@ export const validateData = (refData) => {
 }
 
 export const injectionRouter = (menuList, router) => {
-  menuList.map(item => {
-    if (item.pid === 0) {
-      router.addRoute('/', {path: `/${item.module}`, name: item.module})
-    } else {
-      router.addRoute(item.module, {path: item.component, name: item.component, component: routerMap[item.component]})
-    }
-    if (item.childMenu.length > 0) {
-      injectionRouter(item.childMenu, router)
-    }
-  })
-  console.log()
+  router.addRoute({path:'/dashboard', name: 'dashboard'})
+  router.addRoute('dashboard',{path:'workplace', name: 'workplace',component:routerMap['workplace']})
+
+  router.addRoute({path:'/system', name: 'system',children:[{path:'role', name: 'role',component:routerMap['role']}]})
+  // menuList.map(item => {
+  //   if (item.pid === 0) {
+  //     router.addRoute('/', {path: item.module, name: item.module})
+  //   } else {
+  //     router.addRoute(item.module, {path: item.component, name: item.component, component: routerMap[item.component]})
+  //   }
+  //   if (item.childMenu.length > 0) {
+  //     injectionRouter(item.childMenu, router)
+  //   }
+  // })
   return true
 }

@@ -1,5 +1,4 @@
 import { api } from "@/utils/request"
-import router from '@/router'
 
 
 export default {
