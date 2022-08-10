@@ -3,7 +3,6 @@ import store from "@/store/index"
 import base from "@/views/base"
 import login from "@/views/login/login"
 import workplace from "@/views/dashboard/workplace"
-import { injectionRouter } from "@/utils/commen"
 import error404 from "@/views/error/404"
 
 
@@ -39,10 +38,16 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+//
+// router.isReady().then(() => {
+//   console.log('路由完成初始化')
+//   const menuList = store.state.menu.menuList
+//   injectionRouter(menuList, router)
+//   console.log('路由添加完毕')
+// })
+
 
 router.beforeEach((to, from, next) => {
-  const menuList = store.state.menu.menuList
-  injectionRouter(menuList, router)
 
   if (!router.hasRoute(to.name) && to.name !== '404') {
     const routerList = router.getRoutes()
@@ -72,5 +77,8 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+
+
 
 export default router

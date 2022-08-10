@@ -11,6 +11,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-goods:before {
+  content: "\e695";
+}
+
 .icon-daimashengcheng:before {
   content: "\e637";
 }
