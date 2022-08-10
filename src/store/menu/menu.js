@@ -1,4 +1,6 @@
 import { api } from "@/utils/request"
+import { injectionRouter } from "@/utils/commen"
+import router from "@/router"
 
 
 export default {
@@ -51,6 +53,7 @@ export default {
       api.get("/admin/getMenuList")
         .then(res => {
           const menuList = res.data
+          injectionRouter(menuList, router)
           context.commit('setMenuList', menuList)
         })
         .catch(error => {

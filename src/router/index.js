@@ -6,6 +6,7 @@ import workplace from "@/views/dashboard/workplace"
 import { injectionRouter } from "@/utils/commen"
 import error404 from "@/views/error/404"
 
+
 const routes = [
   {
     path: "/",
@@ -42,11 +43,21 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const menuList = store.state.menu.menuList
   injectionRouter(menuList, router)
-  console.log(router.getRoutes())
-  if (!router.hasRoute(to.name) && to.name !=='404') {
-    next({
-      path: "/404"
-    })
+
+  if (!router.hasRoute(to.name) && to.name !== '404') {
+    const routerList = router.getRoutes()
+    const routerLen = routerList.filter(item => item.path === to.path)
+    if (routerLen.length > 0) {
+      next({
+        ...to,
+        replace: true
+      })
+    } else {
+      next({
+        path: '/404'
+      })
+    }
+    return
   }
   if (to.matched.some(r => r.meta.checkLogin)) {
     if (store.state.authorization) {
