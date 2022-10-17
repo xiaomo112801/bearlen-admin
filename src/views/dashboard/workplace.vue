@@ -2,7 +2,7 @@
   <el-container class="main-workplace">
 
     <el-row class="hello main-item">
-      <div class="userInfo">
+      <el-col class="userInfo"  :xs="{span:0}" :xl="{span:8}" :sm="{span:12}" :md="{span:6}" >
         <div class="head-img">
           <el-image fit="cover" :src="userInfo.avatar" alt="欲瑶琴弦断"/>
         </div>
@@ -10,8 +10,8 @@
           <h1>下午好，{{ userInfo.nickname }}。欢迎回来！</h1>
           <span>{{ userInfo.signature }}</span>
         </div>
-      </div>
-      <div class="workInfo">
+      </el-col>
+      <el-col class="workInfo"  :xs="{span:24}" :xl="{span:16}" :sm="{span:12}" :md="{span:6}" >
         <div class="item">
           <span class="item-name">
             <el-icon color="#409eff" class="project el-icon-tag"><Menu/></el-icon>
@@ -33,7 +33,7 @@
           </span>
           <span class="item-count">3</span>
         </div>
-      </div>
+      </el-col>
     </el-row>
 
     <el-row :gutter="15" justify="center" align="middle" class="shortcut-menu" type="flex">
@@ -271,6 +271,11 @@ const teamMembers = ref([
   display: flex;
   flex-direction: column;
 
+  .main-item {
+    display: flex;
+    flex-direction: row;
+  }
+
   .el-row {
     flex-wrap: wrap;
 
@@ -327,6 +332,9 @@ const teamMembers = ref([
 
     .workInfo {
       display: flex;
+
+      align-items: flex-end;
+
 
       .item {
         display: flex;

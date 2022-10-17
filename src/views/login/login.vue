@@ -172,7 +172,7 @@ const sign = () => {
   justify-content: center;
   height: 100vh;
   box-sizing: border-box;
-  background: url("http://youzi.bearlen.com/public/admin/images/bg-img.png") no-repeat;
+  background: url("https://ydkj.only99.cn/public/platform/images/admin_login_bg_image_0.jpg?v=1") no-repeat;
   background-size: cover;
   -webkit-background-size: cover;
   flex: 1;
@@ -184,7 +184,7 @@ const sign = () => {
     width: 800px;
     height: 400px;
     content: "";
-    background-image: url("http://youzi.bearlen.com/public/admin/images/bg-img.png");
+    background-image: url("https://ydkj.only99.cn/public/platform/images/admin_login_bg_image_0.jpg?v=1");
     background-repeat: no-repeat;
     background-size: cover;
     -webkit-background-size: cover;
